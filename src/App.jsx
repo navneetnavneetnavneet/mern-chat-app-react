@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import MainRoutes from "./routes/MainRoutes";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div className="w-full h-screen">
+      <MainRoutes />
+    </div>
+  );
+};
 
-export default App
+export default App;
