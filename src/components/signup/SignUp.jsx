@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import background from "/background.jpg";
 import logo from "/chatlogo.png";
+import { useDispatch } from "react-redux";
+import { asyncSignUpUser } from "../../store/actions/userActions";
 
 const SignUp = () => {
-  const [FullName, setFullName] = useState("");
+  const dispatch = useDispatch();
+
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -14,13 +18,14 @@ const SignUp = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const user = {
-      FullName,
+    const userData = {
+      fullName,
       email,
       password,
       gender,
     };
-    console.log(user);
+
+    dispatch(asyncSignUpUser(userData));
   };
 
   return (
@@ -56,7 +61,7 @@ const SignUp = () => {
             </label>
             <input
               onChange={(e) => setFullName(e.target.value)}
-              value={FullName}
+              value={fullName}
               type="text"
               placeholder="Enter full name"
               className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
