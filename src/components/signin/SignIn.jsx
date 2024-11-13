@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import background from "/background.jpg";
 import logo from "/chatlogo.png";
+import { useDispatch } from "react-redux";
+import { asyncSignInUser } from "../../store/actions/userActions";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -11,11 +15,11 @@ const SignIn = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const user = {
+    const userData = {
       email,
       password,
     };
-    console.log(user);
+    dispatch(asyncSignInUser(userData));
   };
 
   return (
@@ -80,7 +84,9 @@ const SignIn = () => {
                 ></i>
               )}
             </div>
-            <Link className="w-full inline-block text-end mt-1 text-blue-600 text-sm">Forger Password ?</Link>
+            <Link className="w-full inline-block text-end mt-1 text-blue-600 text-sm">
+              Forger Password ?
+            </Link>
           </div>
           <button className="w-full px-4 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600">
             Sign In

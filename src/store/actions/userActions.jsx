@@ -29,3 +29,19 @@ export const asyncSignUpUser =
       console.log(error.response.data);
     }
   };
+
+export const asyncSignInUser =
+  ({ email, password }) =>
+  async (dispatch, getState) => {
+    try {
+      const { data } = await axios.post("/users/signin", {
+        email,
+        password,
+      });
+      if (data) {
+        dispatch(asyncLoadUser());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
