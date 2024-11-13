@@ -4,6 +4,7 @@ import Homepage from "../components/homepage/Homepage";
 import SignUp from "../components/signup/SignUp";
 import SignIn from "../components/signin/SignIn";
 import Profile from "../components/profile/Profile";
+import ChatPage from "../components/chatpage/ChatPage";
 
 const MainRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const MainRoutes = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Routes>
     </>
   );

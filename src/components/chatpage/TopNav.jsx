@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Users = () => {
+const TopNav = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="scroll w-full h-[70vh] overflow-x-hidden overflow-y-auto">
-      <div className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400">
+    <div className="w-full h-[10vh] px-2 py-2 text-white flex items-center justify-between border-b border-zinc-400">
+      <div className="flex items-center gap-2">
+        <i
+          onClick={() => navigate("/")}
+          className="ri-arrow-left-line text-2xl cursor-pointer"
+        ></i>
         <div className="w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
           <img
             className="w-full h-full object-cover"
@@ -18,8 +25,12 @@ const Users = () => {
           </small>
         </div>
       </div>
+      <div className="flex items-center gap-5 text-2xl">
+        <i className="ri-phone-line"></i>
+        <i className="ri-live-line"></i>
+      </div>
     </div>
   );
 };
 
-export default Users;
+export default TopNav;
