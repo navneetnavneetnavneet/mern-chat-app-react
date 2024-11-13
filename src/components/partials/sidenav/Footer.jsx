@@ -1,9 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { asyncSignOutUser } from "../../../store/actions/userActions";
 
 const Footer = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="w-full h-[10vh] px-4 py-4 flex items-center justify-between">
-      <div className="px-8 py-4 md:px-6 md:py-2 flex items-center gap-1 rounded-full bg-zinc-600 text-white">
+      <div
+        onClick={() => dispatch(asyncSignOutUser())}
+        className="px-8 py-4 md:px-6 md:py-2 flex items-center gap-1 rounded-full bg-zinc-600 text-white"
+      >
         <i className="ri-logout-box-line text-lg"></i>
         <span className="text-lg">Logout</span>
       </div>

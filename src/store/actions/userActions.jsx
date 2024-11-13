@@ -45,3 +45,14 @@ export const asyncSignInUser =
       console.log(error.response.data);
     }
   };
+
+export const asyncSignOutUser = () => async (dispatch, getState) => {
+  try {
+    const { data } = await axios.get("/users/signout");
+    if (data) {
+      dispatch(removeUser());
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
