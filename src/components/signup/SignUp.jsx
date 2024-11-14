@@ -4,6 +4,7 @@ import background from "/background.jpg";
 import logo from "/chatlogo.png";
 import { useDispatch } from "react-redux";
 import { asyncSignUpUser } from "../../store/actions/userActions";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,22 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!fullName || !email || !password || !gender) {
+      return toast.warning("All fields are require !");
+    }
+
+    if (password.length <= 5) {
+      return toast.warning("Password minimun have 6 characters !");
+    }
+
+    if (password.length > 15) {
+      return toast.warning("Password maximum have 15 characters !");
+    }
+
+    if (password !== confirmPassword) {
+      return toast.warning("Password and ConfirmPassword are not match !");
+    }
 
     const userData = {
       fullName,

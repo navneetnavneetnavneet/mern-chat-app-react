@@ -4,6 +4,7 @@ import background from "/background.jpg";
 import logo from "/chatlogo.png";
 import { useDispatch } from "react-redux";
 import { asyncSignInUser } from "../../store/actions/userActions";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,10 @@ const SignIn = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      return toast.warning("Email or Password is required !");
+    }
 
     const userData = {
       email,
