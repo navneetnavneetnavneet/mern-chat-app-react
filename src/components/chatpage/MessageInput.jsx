@@ -1,12 +1,23 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncSendMessage } from "../../store/actions/messageActions";
 
 const MessageInput = () => {
+  const dispatch = useDispatch();
+  const { selectedChat } = useSelector((state) => state.chatReducer);
+
   const [messageInput, setMessageInput] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log({ messageInput });
+    if (!selectedChat || !messageInput) {
+      return;
+    }
+
+    dispatch(asyncSendMessage(selectedChat._id, messageInput));
+
+    setMessageInput("");
   };
 
   return (

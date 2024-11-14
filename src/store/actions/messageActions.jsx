@@ -11,3 +11,19 @@ export const asyncFetchAllMessages = (chatId) => async (dispatch, getState) => {
     console.log(error.response?.data);
   }
 };
+
+export const asyncSendMessage =
+  (chatId, content) => async (dispatch, getState) => {
+    try {
+      const { messages } = getState().messageReducer;
+      const { data } = await axios.post(`/messages/send-message`, {
+        chatId,
+        content,
+      });
+      if (data) {
+        dispatch(setMessages([...messages, data]));
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  };

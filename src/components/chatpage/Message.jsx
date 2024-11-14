@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 const Message = ({ message }) => {
+  const scrollRef = useRef(null);
   const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   return (
     user &&
     message && (
       <div
+        ref={scrollRef}
         className={`${
           user?._id === message.senderId._id ? "ml-auto" : "mr-auto"
         } w-fit gap-1 flex items-start justify-between mb-4`}
