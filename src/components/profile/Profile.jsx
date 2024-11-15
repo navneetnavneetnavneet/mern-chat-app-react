@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { asyncSignOutUser } from "../../store/actions/userActions";
 
 const Profile = () => {
   const navigate = useNavigate();
-  return (
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.userReducer);
+
+  return user ? (
     <div className="w-full h-screen bg-zinc-100">
       <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
         <i
@@ -22,8 +28,8 @@ const Profile = () => {
           />
         </div>
         <div className="">
-          <h1 className="text-3xl font-medium">Harsh Bhaiya</h1>
-          <h1 className="text-xl font-medium">harsh@gmail.com</h1>
+          <h1 className="text-3xl font-medium text-center">{user.fullName}</h1>
+          <h1 className="text-xl font-medium text-center">{user.email}</h1>
         </div>
         <div className="flex items-center justify-center gap-10">
           <Link
@@ -33,12 +39,19 @@ const Profile = () => {
             <i className="ri-pencil-line"></i>
             <span className="text-lg">Edit Profile</span>
           </Link>
-          <div className="px-4 py-2 w-fit flex items-center gap-1 rounded-md bg-red-600 cursor-pointer text-white font-medium">
+          <div
+            onClick={() => dispatch(asyncSignOutUser())}
+            className="px-4 py-2 w-fit flex items-center gap-1 rounded-md bg-red-600 cursor-pointer text-white font-medium"
+          >
             <i className="ri-logout-box-line text-lg"></i>
             <span className="text-lg">Logout</span>
           </div>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="w-full h-screen flex items-center justify-center">
+      <h1 className="text-2xl font-medium opacity-50">Loading . . .</h1>
     </div>
   );
 };
