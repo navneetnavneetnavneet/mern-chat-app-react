@@ -4,25 +4,19 @@ import TopNav from "./TopNav";
 import MessageContainer from "./MessageContainer";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAccessChat } from "../../store/actions/chatActions";
 import { setSelectedChat } from "../../store/reducers/chatSlice";
-import { asyncFetchAllMessages } from "../../store/actions/messageActions";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
-  const { userId } = useParams();
+  const { chats } = useSelector((state) => state.chatReducer);
 
-  const { selectedChat } = useSelector((state) => state.chatReducer);
+  const { chatId } = useParams();
 
   useEffect(() => {
-    dispatch(asyncAccessChat(userId));
+    dispatch(setSelectedChat(chats && chats.find((c) => c._id === chatId)));
 
     return () => dispatch(setSelectedChat(null));
-  }, [userId]);
-
-  useEffect(() => {
-    selectedChat && dispatch(asyncFetchAllMessages(selectedChat._id));
-  }, [selectedChat]);
+  }, [chatId, dispatch]);
 
   return (
     <div className="w-full h-screen bg-zinc-800">

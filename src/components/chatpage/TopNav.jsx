@@ -24,16 +24,18 @@ const TopNav = () => {
           <img
             className="w-full h-full object-cover"
             src={
-              oppositeUser
-                ? oppositeUser.profileImage
-                : "https://images.unsplash.com/photo-1730545160269-5f54484782da?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              selectedChat?.isGroupChat
+                ? "https://images.unsplash.com/photo-1730545160269-5f54484782da?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                : oppositeUser.profileImage
             }
             alt=""
           />
         </div>
         <div className="flex flex-col">
           <h1 className="text-2xl font-medium leading-none">
-            {oppositeUser?.fullName}
+            {selectedChat?.isGroupChat
+              ? selectedChat?.chatName
+              : oppositeUser?.fullName}
           </h1>
           <small className="text-lg md:text-xs font-medium opacity-70 leading-none">
             offline
