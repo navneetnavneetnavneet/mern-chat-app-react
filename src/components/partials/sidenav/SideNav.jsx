@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopNav from "./TopNav";
 import Status from "./Status";
 import { Link } from "react-router-dom";
 import Chats from "./Chats";
 import User from "./User";
+import axios from "../../../utils/axios";
 
 const SideNav = () => {
   const [search, setSearch] = useState("");
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchSearchResults = async () => {
+    if (!search) {
+      return;
+    }
+    setLoading(true);
+
+    try {
+      const { data } = await axios.get(`/users/alluser?search=${search}`);
+      if (data) {
+        setUsers(data);
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error.response?.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchSearchResults();
+
+    return () => setUsers([]);
+  }, [search]);
+
+  // console.log(users);
 
   return (
     <div className="relative w-full md:w-[25%] h-full bg-zinc-100">
@@ -15,6 +44,7 @@ const SideNav = () => {
         <div className="w-full flex items-center rounded-md border border-zinc-400 px-2 text-xl font-medium">
           <i className="ri-search-line mr-2"></i>
           <input
+            id="searchInput"
             onChange={(e) => setSearch(e.target.value)}
             value={search}
             type="text"
@@ -28,9 +58,14 @@ const SideNav = () => {
           )}
         </div>
         <div className="absolute left-0 top-[120%] z-[100] w-full max-h-[50vh] rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto">
-          <User />
-          <User />
-          <User />
+          {!loading ? (
+            users.length > 0 &&
+            users.map((user) => <User key={user._id} user={user} />)
+          ) : (
+            <h1 className="text-xl w-full text-center py-5">
+              Please wait . . .
+            </h1>
+          )}
         </div>
       </div>
       <div className="status w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400 overflow-x-auto overflow-y-hidden">
