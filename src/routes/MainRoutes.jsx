@@ -6,7 +6,7 @@ import SignIn from "../components/signin/SignIn";
 import Profile from "../components/profile/Profile";
 import ChatPage from "../components/chatpage/ChatPage";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncFetchAllUser, asyncLoadUser } from "../store/actions/userActions";
+import { asyncLoadUser } from "../store/actions/userActions";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ const MainRoutes = () => {
 
   useEffect(() => {
     dispatch(asyncLoadUser());
-    dispatch(asyncFetchAllUser());
 
     isAuthenticated && navigate("/");
     !isAuthenticated && navigate("/signin");
