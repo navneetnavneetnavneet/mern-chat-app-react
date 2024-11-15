@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { asyncLoadUser } from "../store/actions/userActions";
 import { asyncFetchAllChats } from "../store/actions/chatActions";
 import { setChats } from "../store/reducers/chatSlice";
+import CreateGroup from "../components/group/CreateGroup";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const MainRoutes = () => {
 
   const { user, isAuthenticated } = useSelector((state) => state.userReducer);
 
+  // console.log(user);
   // console.log(user);
 
   useEffect(() => {
@@ -39,6 +41,7 @@ const MainRoutes = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/chat/:chatId" element={<ChatPage />} />
+        <Route path="/group-create" element={<CreateGroup />} />
       </Routes>
     </>
   );
