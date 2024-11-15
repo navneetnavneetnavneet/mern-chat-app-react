@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setSelectedChat } from "../../../store/reducers/chatSlice";
 
-const Users = () => {
+const Chats = () => {
   const { user } = useSelector((state) => state.userReducer);
   const { chats } = useSelector((state) => state.chatReducer);
 
@@ -52,4 +51,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Chats;
