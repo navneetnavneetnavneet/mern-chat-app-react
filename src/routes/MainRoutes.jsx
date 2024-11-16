@@ -10,6 +10,7 @@ import { asyncLoadUser } from "../store/actions/userActions";
 import { asyncFetchAllChats } from "../store/actions/chatActions";
 import { setChats } from "../store/reducers/chatSlice";
 import CreateGroup from "../components/group/CreateGroup";
+import EditProfile from "../components/edit-profile/EditProfile";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const MainRoutes = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/edit" element={<EditProfile />} />
         <Route path="/chat/:chatId" element={<ChatPage />} />
         <Route path="/group-create" element={<CreateGroup />} />
       </Routes>
