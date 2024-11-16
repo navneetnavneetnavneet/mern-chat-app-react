@@ -5,6 +5,8 @@ import MessageContainer from "./MessageContainer";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedChat } from "../../store/reducers/chatSlice";
+import { asyncFetchAllMessages } from "../../store/actions/messageActions";
+import { setMessages } from "../../store/reducers/messageSlice";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
@@ -14,8 +16,12 @@ const ChatPage = () => {
 
   useEffect(() => {
     dispatch(setSelectedChat(chats && chats.find((c) => c._id === chatId)));
+    dispatch(asyncFetchAllMessages(chatId));
 
-    return () => dispatch(setSelectedChat(null));
+    return () => {
+      dispatch(setSelectedChat(null));
+      dispatch(setMessages([]));
+    };
   }, [chatId, dispatch]);
 
   return (
