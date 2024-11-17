@@ -39,3 +39,50 @@ export const asyncCreateGroup =
       console.log(error.response?.data);
     }
   };
+
+export const asyncRenameGroup =
+  (chatId, chatName ) =>
+  async (dispatch, getState) => {
+    try {
+      const { data } = await axios.post("/chats/rename-group", {
+        chatId,
+        chatName,
+      });
+      if (data) {
+        dispatch(setSelectedChat(data));
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  };
+
+export const asyncAddUserToGroup =
+  (chatId, userId) => async (dispatch, getState) => {
+    try {
+      const { data } = await axios.post("/chats/add-user-group", {
+        chatId,
+        userId,
+      });
+      if (data) {
+        dispatch(setSelectedChat(data));
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  };
+
+export const asyncRemoveUserFromGroup =
+  (chatId, userId ) =>
+  async (dispatch, getState) => {
+    try {
+      const { data } = await axios.post("/chats/remove-user-group", {
+        chatId,
+        userId,
+      });
+      if (data) {
+        dispatch(setSelectedChat(data));
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  };

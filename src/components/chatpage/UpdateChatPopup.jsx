@@ -1,8 +1,16 @@
 import axios from "../../utils/axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import {
+  asyncAddUserToGroup,
+  asyncRemoveUserFromGroup,
+  asyncRenameGroup,
+} from "../../store/actions/chatActions";
 
 const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
+  const dispatch = useDispatch();
+
   const [chatName, setChatName] = useState("");
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
@@ -32,16 +40,39 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
     return () => setUsers([]);
   }, [search]);
 
-  const handleAddUser = async (u) => {};
+  const handleAddUser = async (u) => {
+    if (selectedChat.groupAdmin._id !== user._id) {
+      return toast.warning("Only admin can add users !");
+    }
 
-  const handleRemoveUser = () => {};
+    if (u) {
+      if (selectedChat.users.find((su) => su._id === u._id)) {
+        return toast.warning("User already existed in group !");
+      }
 
-  const submitHandler = (e) => {
+      await dispatch(asyncAddUserToGroup(selectedChat._id, u._id));
+      toast.success(`User added in ${selectedChat.chatName} group`);
+    }
+  };
+
+  const handleRemoveUser = async (u) => {
+    if (selectedChat.groupAdmin._id !== user._id) {
+      return toast.warning("Only admin can remove users !");
+    }
+
+    await dispatch(asyncRemoveUserFromGroup(selectedChat._id, u._id));
+    toast.success(`User removed from ${selectedChat.chatName} group`);
+  };
+
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     if (!chatName) {
       return toast.warning("Please enter group name !");
     }
+
+    await dispatch(asyncRenameGroup(selectedChat._id, chatName));
+    setChatName("");
   };
 
   console.log(selectedChat);
