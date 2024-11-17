@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MessageInput from "./MessageInput";
 import TopNav from "./TopNav";
 import MessageContainer from "./MessageContainer";

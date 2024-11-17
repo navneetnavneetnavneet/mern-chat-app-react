@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "../../utils/axios";
 import { toast } from "react-toastify";
@@ -79,7 +79,7 @@ const CreateGroup = () => {
       <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
         <i
           onClick={() => navigate("/")}
-          className="ri-arrow-left-s-line text-3xl"
+          className="ri-arrow-left-s-line text-3xl cursor-pointer"
         ></i>
         <h1 className="text-3xl font-semibold">New Group</h1>
         <i className="ri-settings-3-line text-3xl"></i>
@@ -95,11 +95,12 @@ const CreateGroup = () => {
         >
           <input
             onChange={(e) => setChatName(e.target.value)}
+            value={chatName}
             type="text"
             placeholder="Group name"
-            className="w-full px-2 py-2 rounded-md outline-none border-border-zinc-400"
+            className="w-full px-2 py-2 rounded-md outline-none border border-zinc-400"
           />
-          <div className="w-full px-2 rounded-md border-border-zinc-400 bg-white flex items-center">
+          <div className="w-full px-2 rounded-md border border-zinc-400 bg-white flex items-center">
             <input
               onChange={(e) => setSearch(e.target.value)}
               value={search}
