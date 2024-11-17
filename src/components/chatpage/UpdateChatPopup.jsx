@@ -4,11 +4,14 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
   asyncAddUserToGroup,
+  asyncExitUserFromGroup,
   asyncRemoveUserFromGroup,
   asyncRenameGroup,
 } from "../../store/actions/chatActions";
+import { useNavigate } from "react-router-dom";
 
 const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [chatName, setChatName] = useState("");
@@ -64,6 +67,14 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
     toast.success(`User removed from ${selectedChat.chatName} group`);
   };
 
+  const handleExitUser = async () => {
+    if (user) {
+      await dispatch(asyncExitUserFromGroup(selectedChat._id));
+      toast.success(`User exit from ${selectedChat.chatName} group`);
+      navigate("/");
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -75,8 +86,6 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
     setChatName("");
   };
 
-  console.log(selectedChat);
-
   return (
     selectedChat && (
       <div
@@ -84,13 +93,13 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
           hidden ? "hidden" : "flex"
         } items-center justify-center`}
       >
-        <div className="w-full md:w-[35%] md:mx-auto bg-white rounded-md">
-          <div className="w-full text-xl md:text-base font-medium flex flex-col gap-5 px-4 py-4">
+        <div className="w-full md:w-[35%] md:mx-auto bg-zinc-100 rounded-md">
+          <div className="w-full text-xl md:text-base font-medium flex flex-col gap-3 px-4 py-4">
             <i
               onClick={() => setHidden(!hidden)}
               className="ri-close-line text-2xl cursor-pointer w-full text-end"
             ></i>
-            <h1 className="mb-5 px-2 py-2 rounded-md bg-orange-400 text-white text-3xl font-semibold w-full text-center">
+            <h1 className="mb-5 md:mb-2 px-2 py-2 rounded-md bg-orange-400 text-white text-3xl md:text-2xl font-semibold w-full text-center">
               {selectedChat.chatName}
             </h1>
             <div className="status w-full flex gap-5 overflow-x-auto overflow-y-hidden">
@@ -153,7 +162,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 ""
               )}
             </div>
-            <div className="w-full max-h-[30vh] rounded-md overflow-x-hidden overflow-y-auto">
+            <div className="w-full max-h-[20vh] rounded-md overflow-x-hidden overflow-y-auto">
               {!loading ? (
                 users.length > 0 &&
                 users.map((user) => (
@@ -182,7 +191,10 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 </h1>
               )}
             </div>
-            <button className="px-2 py-2 rounded-md outline-none text-white font-medium bg-red-500 hover:bg-red-600">
+            <button
+              onClick={handleExitUser}
+              className="px-2 py-2 rounded-md outline-none text-white font-medium bg-red-500 hover:bg-red-600"
+            >
               Exit group
             </button>
           </div>

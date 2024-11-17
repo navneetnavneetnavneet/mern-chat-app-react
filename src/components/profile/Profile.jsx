@@ -16,7 +16,7 @@ const Profile = () => {
           onClick={() => navigate("/")}
           className="ri-arrow-left-s-line text-3xl"
         ></i>
-        <h1 className="text-3xl font-semibold">My Profile</h1>
+        <h1 className="text-3xl md:text-2xl font-semibold">My Profile</h1>
         <i className="ri-settings-3-line text-3xl"></i>
       </div>
       <div className="w-full px-4 py-10 flex flex-col gap-y-5 items-center justify-center">

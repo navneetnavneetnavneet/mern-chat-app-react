@@ -18,9 +18,6 @@ const MainRoutes = () => {
 
   const { user, isAuthenticated } = useSelector((state) => state.userReducer);
 
-  // console.log(user);
-  // console.log(user);
-
   useEffect(() => {
     dispatch(asyncLoadUser());
 

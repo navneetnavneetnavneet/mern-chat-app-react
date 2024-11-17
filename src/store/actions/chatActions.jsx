@@ -41,8 +41,7 @@ export const asyncCreateGroup =
   };
 
 export const asyncRenameGroup =
-  (chatId, chatName ) =>
-  async (dispatch, getState) => {
+  (chatId, chatName) => async (dispatch, getState) => {
     try {
       const { data } = await axios.post("/chats/rename-group", {
         chatId,
@@ -72,8 +71,7 @@ export const asyncAddUserToGroup =
   };
 
 export const asyncRemoveUserFromGroup =
-  (chatId, userId ) =>
-  async (dispatch, getState) => {
+  (chatId, userId) => async (dispatch, getState) => {
     try {
       const { data } = await axios.post("/chats/remove-user-group", {
         chatId,
@@ -81,6 +79,21 @@ export const asyncRemoveUserFromGroup =
       });
       if (data) {
         dispatch(setSelectedChat(data));
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+  };
+
+export const asyncExitUserFromGroup =
+  (chatId) => async (dispatch, getState) => {
+    try {
+      const { data } = await axios.post("/chats/exit-user-group", {
+        chatId,
+      });
+      if (data) {
+        dispatch(setSelectedChat(null));
+        dispatch(asyncFetchAllChats());
       }
     } catch (error) {
       console.log(error.response?.data);

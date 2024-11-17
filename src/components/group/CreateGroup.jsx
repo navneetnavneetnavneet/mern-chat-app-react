@@ -81,12 +81,12 @@ const CreateGroup = () => {
           onClick={() => navigate("/")}
           className="ri-arrow-left-s-line text-3xl cursor-pointer"
         ></i>
-        <h1 className="text-3xl font-semibold">New Group</h1>
+        <h1 className="text-3xl md:text-2xl font-semibold">New Group</h1>
         <i className="ri-settings-3-line text-3xl"></i>
       </div>
 
       <div className="w-full md:w-[35%] md:mx-auto mt-10 px-4 py-4">
-        <h1 className="mb-5 px-2 py-2 rounded-md bg-orange-400 text-white text-3xl font-semibold w-full text-center">
+        <h1 className="mb-5 md:mb-2 px-2 py-2 rounded-md bg-orange-400 text-white text-3xl md:text-2xl font-semibold w-full text-center">
           Group details
         </h1>
         <form
@@ -148,7 +148,7 @@ const CreateGroup = () => {
               <></>
             )}
           </div>
-          <div className="w-full max-h-[30vh] rounded-md overflow-x-hidden overflow-y-auto">
+          <div className="w-full max-h-[20vh] rounded-md overflow-x-hidden overflow-y-auto">
             {!loading ? (
               users.length > 0 &&
               users.map((user) => (
