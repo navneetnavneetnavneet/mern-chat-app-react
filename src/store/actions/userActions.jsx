@@ -56,3 +56,29 @@ export const asyncSignOutUser = () => async (dispatch, getState) => {
     console.log(error.response.data);
   }
 };
+
+export const asyncEditProfile =
+  ({ fullName, email, gender, profileImage }) =>
+  async (dispatch, getState) => {
+    try {
+      const { data } = await axios.post(
+        "/users/edit",
+        {
+          fullName,
+          email,
+          gender,
+          profileImage,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (data) {
+        dispatch(removeUser());
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };

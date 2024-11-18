@@ -17,7 +17,7 @@ const TopNav = () => {
       >
         <img
           className="w-full h-full object-cover"
-          src={user?.profileImage}
+          src={user?.profileImage?.url}
           alt=""
         />
       </div>

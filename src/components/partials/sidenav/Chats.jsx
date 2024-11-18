@@ -21,8 +21,8 @@ const Chats = () => {
                 src={
                   !chat.isGroupChat
                     ? chat.users[0]._id === user._id
-                      ? chat.users[1].profileImage
-                      : chat.users[0].profileImage
+                      ? chat.users[1].profileImage.url
+                      : chat.users[0].profileImage.url
                     : "https://images.unsplash.com/photo-1730724620244-40d6e978acd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1N3x8fGVufDB8fHx8fA%3D%3D"
                 }
                 alt=""
