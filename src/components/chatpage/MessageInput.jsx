@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncSendMessage } from "../../store/actions/messageActions";
+import { socketContext } from "../../context/SocketContext";
+import axios from "../../utils/axios";
+import { setMessages } from "../../store/reducers/messageSlice";
 
 const MessageInput = () => {
   const dispatch = useDispatch();
   const { selectedChat } = useSelector((state) => state.chatReducer);
+  const { messages } = useSelector((state) => state.messageReducer);
+
+  const { socket } = useContext(socketContext);
 
   const [messageInput, setMessageInput] = useState("");
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     if (!selectedChat || !messageInput) {
       return;
     }
 
-    dispatch(asyncSendMessage(selectedChat._id, messageInput));
+    try {
+      const { data } = await axios.post(`/messages/send-message`, {
+        chatId: selectedChat?._id,
+        content: messageInput,
+      });
+      if (data) {
+        socket && socket.emit("new-message", data);
+        await dispatch(setMessages([...messages, data]));
+      }
+    } catch (error) {
+      console.log(error.response?.data);
+    }
+
+    // dispatch(asyncSendMessage(selectedChat._id, messageInput));
 
     setMessageInput("");
   };

@@ -35,7 +35,7 @@ const Message = ({ message }) => {
               {/* loggedInUser profile image */}
               <img
                 className="w-full h-full object-cover"
-                src="https://ik.imagekit.io/uxbuiyrfp/16fe0076-7a0b-45e6-aa75-559a33319c58_intqMSSl8.jpg"
+                src={user.profileImage.url}
                 alt=""
               />
             </div>
@@ -45,7 +45,7 @@ const Message = ({ message }) => {
             <div className="w-[10vw] h-[10vw] md:w-[3vw] md:h-[3vw] rounded-full  overflow-hidden">
               <img
                 className="w-full h-full object-cover"
-                src={message.senderId?.profileImage}
+                src={message.senderId?.profileImage.url}
                 alt=""
               />
             </div>
