@@ -8,13 +8,16 @@ const TopNav = () => {
 
   const [hidden, setHidden] = useState(true);
 
-  const { user } = useSelector((state) => state.userReducer);
+  const { user, onlineUsers } = useSelector((state) => state.userReducer);
   const { selectedChat } = useSelector((state) => state.chatReducer);
 
   const oppositeUser =
     selectedChat &&
     selectedChat.isGroupChat === false &&
     selectedChat.users.find((u) => u._id !== user._id);
+
+  const isOppositeUserOnline =
+    oppositeUser && onlineUsers.includes(oppositeUser._id);
 
   return (
     selectedChat && (
@@ -41,8 +44,12 @@ const TopNav = () => {
                 ? selectedChat?.chatName
                 : oppositeUser?.fullName}
             </h1>
-            <small className="text-lg md:text-xs font-medium opacity-70 leading-none">
-              offline
+            <small
+              className={`${
+                isOppositeUserOnline ? "text-green-600" : "opacity-70"
+              } text-lg md:text-xs font-medium leading-none`}
+            >
+              {isOppositeUserOnline ? "online" : "offline"}
             </small>
           </div>
         </div>

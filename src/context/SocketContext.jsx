@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { setOnlineUsers } from "../store/reducers/userSlice";
 
 export const socketContext = createContext(null);
 
 export const SocketContextProvider = ({ children }) => {
+  const dispatch = useDispatch();
+
   const [socket, setSocket] = useState(null); // Start with null for clarity
   const { user } = useSelector((state) => state.userReducer);
 
@@ -26,6 +29,10 @@ export const SocketContextProvider = ({ children }) => {
 
     newSocket.on("connected", () => {
       console.log("Socket is connected!");
+    });
+
+    newSocket.on("getOnlineUsers", (onlineUsers) => {
+      dispatch(setOnlineUsers(onlineUsers));
     });
 
     // Cleanup on component unmount or user change
