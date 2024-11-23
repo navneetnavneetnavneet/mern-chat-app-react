@@ -11,6 +11,10 @@ import { asyncFetchAllChats } from "../store/actions/chatActions";
 import { setChats } from "../store/reducers/chatSlice";
 import CreateGroup from "../components/group/CreateGroup";
 import EditProfile from "../components/edit-profile/EditProfile";
+import { asyncFetchAllStatus } from "../store/actions/statusActions";
+import { setAllStatus } from "../store/reducers/statusSlice";
+import UploadStatus from "../components/status/UploadStatus";
+import ShowStatus from "../components/status/ShowStatus";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -23,12 +27,16 @@ const MainRoutes = () => {
 
     if (isAuthenticated) {
       dispatch(asyncFetchAllChats());
+      dispatch(asyncFetchAllStatus());
     }
 
     isAuthenticated && navigate("/");
     !isAuthenticated && navigate("/signin");
 
-    return () => setChats([]);
+    return () => {
+      dispatch(setChats([]));
+      dispatch(setAllStatus([]));
+    };
   }, [isAuthenticated, dispatch]);
 
   return (
@@ -41,6 +49,8 @@ const MainRoutes = () => {
         <Route path="/edit" element={<EditProfile />} />
         <Route path="/chat/:chatId" element={<ChatPage />} />
         <Route path="/group-create" element={<CreateGroup />} />
+        <Route path="/status/:userId" element={<ShowStatus />} />
+        <Route path="/status/upload" element={<UploadStatus />} />
       </Routes>
     </>
   );

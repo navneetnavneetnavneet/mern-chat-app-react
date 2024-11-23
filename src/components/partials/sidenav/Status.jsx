@@ -1,16 +1,35 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const Status = () => {
+const Status = ({ user }) => {
+  const loggedInUser = useSelector((state) => state.userReducer);
+
   return (
-    <div className="w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full flex-shrink-0 p-[2px] border-2 border-zinc-400">
-      <div className="w-full h-full rounded-full overflow-hidden">
-        <img
-          className="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1730545160269-5f54484782da?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-        />
+    user && (
+      <div className="relative w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full flex-shrink-0 p-[2px] border-2 border-zinc-400">
+        <Link
+          to={`/status/${user._id}`}
+          className="w-full flex h-full rounded-full overflow-hidden"
+        >
+          <img
+            className="w-full h-full object-cover"
+            src={user.profileImage.url}
+            alt=""
+          />
+        </Link>
+        {loggedInUser && loggedInUser?.user?._id === user?._id ? (
+          <Link
+            to="/status/upload"
+            className="w-[6vw] h-[6vw] md:w-[1.5vw] md:h-[1.5vw] border-2 border-zinc-600 flex items-center justify-center absolute z-[100] bottom-0 right-0 translate-x-1/4 translate-y-1/4 rounded-full bg-zinc-200"
+          >
+            <i className="ri-add-line text-[1.4rem] font-semibold md:font-normal"></i>
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
-    </div>
+    )
   );
 };
 

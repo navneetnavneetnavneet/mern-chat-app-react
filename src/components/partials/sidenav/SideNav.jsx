@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import Chats from "./Chats";
 import User from "./User";
 import axios from "../../../utils/axios";
+import { useSelector } from "react-redux";
 
 const SideNav = () => {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { user } = useSelector((state) => state.userReducer);
+  const { allStatus } = useSelector((state) => state.statusReducer);
 
   const fetchSearchResults = async () => {
     if (!search) {
@@ -69,13 +73,11 @@ const SideNav = () => {
         </div>
       </div>
       <div className="status w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400 overflow-x-auto overflow-y-hidden">
-        <Status />
-        <Status />
-        <Status />
-        <Status />
-        <Status />
-        <Status />
-        <Status />
+        {user?.status?.length === 0 ? <Status user={user} /> : ""}
+        {allStatus.length > 0 &&
+          allStatus.map((status) => (
+            <Status key={status._id} user={status.user} />
+          ))}
         <Status />
       </div>
       <Chats />
