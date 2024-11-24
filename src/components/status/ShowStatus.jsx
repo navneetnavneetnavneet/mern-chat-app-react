@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncDeleteStatus } from "../../store/actions/statusActions";
 
 const ShowStatus = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { userId } = useParams();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +17,7 @@ const ShowStatus = () => {
 
   useEffect(() => {
     let interval;
-    if (statusUser) {
+    if (statusUser.status.length > 0) {
       interval = setInterval(() => {
         setProgress((prev) => prev + 1);
       }, 30);
@@ -53,7 +55,8 @@ const ShowStatus = () => {
   };
 
   return (
-    statusUser && (
+    statusUser &&
+    user && (
       <div className="relative w-full h-screen bg-zinc-100 overflow-hidden">
         <div
           style={{
@@ -74,7 +77,14 @@ const ShowStatus = () => {
             </h1>
           </div>
           {statusUser._id === user?._id && (
-            <i className="ri-delete-bin-line text-xl"></i>
+            <i
+              onClick={async () =>
+                await dispatch(
+                  asyncDeleteStatus(statusUser?.status[currentIndex]?._id)
+                )
+              }
+              className="ri-delete-bin-line z-[2000] text-xl"
+            ></i>
           )}
           <div className="absolute bottom-0 left-0 w-full h-[3px] z-10 bg-zinc-400 overflow-hidden">
             <div
