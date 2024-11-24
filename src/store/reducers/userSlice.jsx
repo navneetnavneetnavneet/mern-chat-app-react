@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   isAuthenticated: false,
   onlineUsers: [],
+  allUser: [],
 };
 
 export const userSlice = createSlice({
@@ -21,8 +22,12 @@ export const userSlice = createSlice({
     setOnlineUsers: (state, action) => {
       state.onlineUsers = action.payload;
     },
+    setAllUser: (state, action) => {
+      state.allUser = action.payload;
+    },
   },
 });
 
-export const { loadUser, removeUser, setOnlineUsers } = userSlice.actions;
+export const { loadUser, removeUser, setOnlineUsers, setAllUser } =
+  userSlice.actions;
 export default userSlice.reducer;

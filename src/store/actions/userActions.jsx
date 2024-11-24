@@ -1,4 +1,4 @@
-import { loadUser, removeUser } from "../reducers/userSlice";
+import { loadUser, removeUser, setAllUser } from "../reducers/userSlice";
 import axios from "../../utils/axios";
 
 export const asyncLoadUser = () => async (dispatch, getState) => {
@@ -82,3 +82,14 @@ export const asyncEditProfile =
       console.log(error.response.data);
     }
   };
+
+export const asyncFetchAllUser = () => async (dispatch, getState) => {
+  try {
+    const { data } = await axios.get("/users/");
+    if (data) {
+      dispatch(setAllUser(data));
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};

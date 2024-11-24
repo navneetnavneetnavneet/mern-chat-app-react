@@ -6,7 +6,7 @@ import SignIn from "../components/signin/SignIn";
 import Profile from "../components/profile/Profile";
 import ChatPage from "../components/chatpage/ChatPage";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncLoadUser } from "../store/actions/userActions";
+import { asyncFetchAllUser, asyncLoadUser } from "../store/actions/userActions";
 import { asyncFetchAllChats } from "../store/actions/chatActions";
 import { setChats } from "../store/reducers/chatSlice";
 import CreateGroup from "../components/group/CreateGroup";
@@ -15,6 +15,7 @@ import { asyncFetchAllStatus } from "../store/actions/statusActions";
 import { setAllStatus } from "../store/reducers/statusSlice";
 import UploadStatus from "../components/status/UploadStatus";
 import ShowStatus from "../components/status/ShowStatus";
+import { setAllUser } from "../store/reducers/userSlice";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const MainRoutes = () => {
     if (isAuthenticated) {
       dispatch(asyncFetchAllChats());
       dispatch(asyncFetchAllStatus());
+      dispatch(asyncFetchAllUser());
     }
 
     isAuthenticated && navigate("/");
@@ -36,6 +38,7 @@ const MainRoutes = () => {
     return () => {
       dispatch(setChats([]));
       dispatch(setAllStatus([]));
+      dispatch(setAllUser([]));
     };
   }, [isAuthenticated, dispatch]);
 
