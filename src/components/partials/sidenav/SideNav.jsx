@@ -61,7 +61,7 @@ const SideNav = () => {
             <></>
           )}
         </div>
-        <div className="absolute left-0 top-[120%] z-[100] w-full max-h-[50vh] rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto">
+        <div className="absolute left-0 top-[120%] z-[1000] w-full max-h-[50vh] rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto">
           {!loading ? (
             users.length > 0 &&
             users.map((user) => <User key={user._id} user={user} />)

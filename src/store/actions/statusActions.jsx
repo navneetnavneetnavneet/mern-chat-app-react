@@ -11,3 +11,22 @@ export const asyncFetchAllStatus = () => async (dispatch, getState) => {
     console.log(error.response?.data);
   }
 };
+
+export const asyncUploadStatus = (media) => async (dispatch, getState) => {
+  try {
+    const { data } = await axios.post(
+      "/status/upload",
+      { media },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (data) {
+      dispatch(asyncFetchAllStatus());
+    }
+  } catch (error) {
+    console.log(error.response?.data);
+  }
+};
