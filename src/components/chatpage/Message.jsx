@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Message = ({ message }) => {
   const scrollRef = useRef(null);
@@ -44,9 +45,9 @@ const Message = ({ message }) => {
                     <Link
                       target="_blank"
                       to={message.media?.url}
-                      className="w-80 bg-zinc-600 flex items-center gap-2 px-2 py-4"
+                      className="w-80 bg-zinc-700 flex items-center gap-2 px-2 py-2"
                     >
-                      <i className="ri-file-text-line text-[2rem] font-normal"></i>
+                      <i className="ri-file-text-line text-[2rem] font-normal text-white"></i>
                       <span className="text-blue-600 text-lg">
                         {message.media?.url.slice(0, 30)}
                       </span>

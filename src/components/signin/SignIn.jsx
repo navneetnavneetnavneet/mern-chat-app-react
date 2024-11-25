@@ -5,26 +5,24 @@ import logo from "/chatlogo.png";
 import { useDispatch } from "react-redux";
 import { asyncSignInUser } from "../../store/actions/userActions";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const SignIn = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-    if (!email || !password) {
-      return toast.warning("Email or Password is required !");
-    }
+  const onSubmit = (data) => {
+    dispatch(asyncSignInUser(data));
 
-    const userData = {
-      email,
-      password,
-    };
-    dispatch(asyncSignInUser(userData));
+    reset();
   };
 
   return (
@@ -50,7 +48,7 @@ const SignIn = () => {
           </h4>
         </div>
         <form
-          onSubmit={submitHandler}
+          onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-3 mt-5 text-xl font-medium md:text-base"
         >
           <div>
@@ -58,12 +56,18 @@ const SignIn = () => {
               Email
             </label>
             <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
               type="email"
               placeholder="Enter email"
               className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
+              {...register("email", { required: true })}
             />
+            {errors.email && errors.email.type === "required" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                This field is required
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <label htmlFor="password" className=" opacity-80">
@@ -71,11 +75,14 @@ const SignIn = () => {
             </label>
             <div className="w-full flex items-center justify-between rounded-md mt-1 bg-zinc-100 border border-zinc-400">
               <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full px-2 py-2 rounded-md border-none bg-zinc-100 border-zinc-400 outline-none "
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 15,
+                })}
               />
               {!show ? (
                 <i
@@ -89,6 +96,27 @@ const SignIn = () => {
                 ></i>
               )}
             </div>
+            {errors.password && errors.password.type === "required" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                This field is required
+              </span>
+            ) : (
+              ""
+            )}
+            {errors.password && errors.password.type === "minLength" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                Password have minimum 6 characters
+              </span>
+            ) : (
+              ""
+            )}
+            {errors.password && errors.password.type === "maxLength" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                Password have maximum 15 characters
+              </span>
+            ) : (
+              ""
+            )}
             <Link className="w-full inline-block text-end mt-1 text-blue-600 text-sm">
               Forger Password ?
             </Link>

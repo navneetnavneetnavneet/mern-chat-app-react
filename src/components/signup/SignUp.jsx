@@ -4,45 +4,23 @@ import background from "/background.jpg";
 import logo from "/chatlogo.png";
 import { useDispatch } from "react-redux";
 import { asyncSignUpUser } from "../../store/actions/userActions";
-import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [gender, setGender] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
   const [show, setShow] = useState(false);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    if (!fullName || !email || !password || !gender) {
-      return toast.warning("All fields are require !");
-    }
-
-    if (password.length <= 5) {
-      return toast.warning("Password minimun have 6 characters !");
-    }
-
-    if (password.length > 15) {
-      return toast.warning("Password maximum have 15 characters !");
-    }
-
-    if (password !== confirmPassword) {
-      return toast.warning("Password and ConfirmPassword are not match !");
-    }
-
-    const userData = {
-      fullName,
-      email,
-      password,
-      gender,
-    };
-
-    dispatch(asyncSignUpUser(userData));
+  const onSubmit = (data) => {
+    dispatch(asyncSignUpUser(data));
+    reset();
   };
 
   return (
@@ -69,7 +47,7 @@ const SignUp = () => {
           </h4>
         </div>
         <form
-          onSubmit={submitHandler}
+          onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-y-3 mt-5 text-xl font-medium md:text-base"
         >
           <div>
@@ -77,24 +55,36 @@ const SignUp = () => {
               Full name
             </label>
             <input
-              onChange={(e) => setFullName(e.target.value)}
-              value={fullName}
               type="text"
               placeholder="Enter full name"
               className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
+              {...register("fullName", { required: true })}
             />
+            {errors.fullName && errors.fullName.type === "required" ? (
+              <span className="text-sm font-medium text-red-600">
+                This field is required
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <label htmlFor="email" className=" opacity-80">
               Email
             </label>
             <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
               type="email"
               placeholder="Enter email"
               className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
+              {...register("email", { required: true })}
             />
+            {errors.email && errors.email.type === "required" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                This field is required
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <label htmlFor="password" className=" opacity-80">
@@ -102,11 +92,14 @@ const SignUp = () => {
             </label>
             <div className="w-full flex items-center justify-between rounded-md mt-1 bg-zinc-100 border border-zinc-400">
               <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full px-2 py-2 rounded-md border-none bg-zinc-100 border-zinc-400 outline-none "
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 15,
+                })}
               />
               {!show ? (
                 <i
@@ -120,18 +113,46 @@ const SignUp = () => {
                 ></i>
               )}
             </div>
+            {errors.password && errors.password.type === "required" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                This field is required
+              </span>
+            ) : (
+              ""
+            )}
+            {errors.password && errors.password.type === "minLength" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                Password have minimum 6 characters
+              </span>
+            ) : (
+              ""
+            )}
+            {errors.password && errors.password.type === "maxLength" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                Password have maximum 15 characters
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <label htmlFor="confirm password" className=" opacity-80">
               Confirm password
             </label>
             <input
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              value={confirmPassword}
               type="password"
               placeholder="Enter confirm password"
               className="w-full px-2 py-2 rounded-md mt-1 bg-zinc-100 border border-zinc-400 outline-none "
+              {...register("confirmPassword", { required: true })}
             />
+            {errors.confirmPassword &&
+            errors.confirmPassword.type === "required" ? (
+              <span className="text-sm md:text-xs font-medium text-red-600">
+                This field is required
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-1">
@@ -139,8 +160,7 @@ const SignUp = () => {
                 name="gender"
                 type="radio"
                 value="male"
-                onChange={(e) => setGender(e.target.value)}
-                checked={gender === "male"}
+                {...register("gender", { required: true })}
               />
               <span className="text-lg md:text-base opacity-80">Male</span>
             </div>
@@ -149,8 +169,7 @@ const SignUp = () => {
                 name="gender"
                 type="radio"
                 value="female"
-                onChange={(e) => setGender(e.target.value)}
-                checked={gender === "female"}
+                {...register("gender", { required: true })}
               />
               <span className="text-lg md:text-base opacity-80">Female</span>
             </div>
@@ -159,8 +178,7 @@ const SignUp = () => {
                 name="gender"
                 type="radio"
                 value="other"
-                onChange={(e) => setGender(e.target.value)}
-                checked={gender === "other"}
+                {...register("gender", { required: true })}
               />
               <span className="text-lg md:text-base opacity-80">Other</span>
             </div>
