@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import UpdateChatPopup from "./UpdateChatPopup";
-import ChatInformation from "./ChatInformation";
 
 const TopNav = () => {
   const navigate = useNavigate();
 
   const [hidden, setHidden] = useState(true);
-  const [chatInfoHidden, setChatInfoHidden] = useState(true);
 
   const { user, onlineUsers } = useSelector((state) => state.userReducer);
   const { selectedChat } = useSelector((state) => state.chatReducer);
@@ -23,10 +21,7 @@ const TopNav = () => {
 
   return (
     selectedChat && (
-      <div
-        onClick={() => setChatInfoHidden(!chatInfoHidden)}
-        className="w-full bg-red-400 h-[10vh] px-2 py-2 text-white flex items-center justify-between border-b border-zinc-400"
-      >
+      <div className="w-full h-[10vh] px-2 py-2 text-white flex items-center justify-between border-b border-zinc-400">
         <div className="flex items-center gap-2">
           <i
             onClick={() => navigate("/")}
@@ -76,8 +71,6 @@ const TopNav = () => {
             selectedChat={selectedChat}
           />
         )}
-
-        {!chatInfoHidden && <ChatInformation chatInfoHidden={chatInfoHidden} setChatInfoHidden={setChatInfoHidden} selectedChat={selectedChat} />}
       </div>
     )
   );
