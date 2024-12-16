@@ -13,7 +13,7 @@ const TopNav = () => {
       </h1>
       <div
         onClick={() => navigate("/profile")}
-        className="w-[15vw] h-[15vw] md:w-[3vw] md:h-[3vw] cursor-pointer rounded-full overflow-hidden"
+        className="w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] cursor-pointer rounded-full overflow-hidden"
       >
         <img
           className="w-full h-full object-cover"

@@ -7,7 +7,7 @@ const Status = ({ user }) => {
 
   return (
     user && (
-      <div className="relative w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full flex-shrink-0 p-[2px] border-2 border-zinc-400">
+      <div className="relative w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full flex-shrink-0 p-[2px] border-2 border-zinc-400">
         <Link
           to={`/status/${user._id}`}
           className="w-full flex h-full rounded-full overflow-hidden"

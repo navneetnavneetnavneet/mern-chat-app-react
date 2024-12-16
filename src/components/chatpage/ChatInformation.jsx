@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAccessChat, asyncFetchAllChats } from "../../store/actions/chatActions";
+import {
+  asyncAccessChat,
+  asyncFetchAllChats,
+  asyncExitUserFromGroup,
+} from "../../store/actions/chatActions";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
   const navigate = useNavigate();
@@ -16,43 +21,26 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
     selectedChat.isGroupChat === false &&
     selectedChat.users.find((u) => u._id !== user?._id);
 
-  const [searchInputHidden, setSearchInputHidden] = useState(true);
-  const [searchInput, setSearchInput] = useState("");
+  const handleExitUser = async () => {
+    if (user) {
+      await dispatch(asyncExitUserFromGroup(selectedChat._id));
+      toast.success(`User exit from ${selectedChat.chatName} group`);
+      navigate("/");
+    }
+  };
 
   return (
     selectedChat && (
       <div className="w-full h-screen overflow-x-hidden overflow-y-auto pb-10 text-black bg-zinc-100 absolute left-0 top-0">
-        <div
-          className={`${
-            searchInputHidden ? "hidden" : "flex"
-          } items-center fixed top-0 left-0 z-10 w-full px-4 py-1 mt-1 bg-white border border-zinc-400 rounded-full`}
-        >
-          <i className="ri-search-line text-xl font-medium"></i>
-          <input
-            onChange={(e) => setSearchInput(e.target.value)}
-            value={searchInput}
-            type="text"
-            placeholder="Search users . . ."
-            className="w-full px-4 py-2 border-none outline-none text-lg font-medium"
-          />
-          {searchInput ? (
-            <i
-              onClick={() => setSearchInput("")}
-              className="ri-close-line text-xl font-medium cursor-pointer"
-            ></i>
-          ) : (
-            ""
-          )}
-        </div>
         <div className="w-full h-[10vh] px-4 py-4 border-b border-zinc-400 flex items-center justify-between">
           <i
             onClick={() => setChatInfo(!chatInfo)}
             className="ri-arrow-left-line text-xl cursor-pointer"
           ></i>
-          <h1 className="text-3xl md:text-2xl font-semibold">Details</h1>
+          <h1 className="text-3xl md:text-2xl font-semibold">Chat Details</h1>
           <div className="flex items-center gap-5">
-            <i className="ri-bookmark-line text-xl"></i>
-            <i className="ri-menu-line text-xl"></i>
+            <i className="ri-bookmark-line text-xl cursor-pointer"></i>
+            <i className="ri-menu-line text-xl cursor-pointer"></i>
           </div>
         </div>
         <div className="flex flex-col justify-center items-center my-5">
@@ -83,7 +71,7 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
             </h3>
           )}
         </div>
-        <div className="w-full border-y border-zinc-400 px-4 py-4">
+        <div className="w-full flex flex-col gap-2 border-y border-zinc-400 px-4 py-4">
           <div className="flex items-center gap-2">
             <i className="ri-notification-line text-xl font-medium"></i>
             <h3 className="text-xl md:text-base font-medium">Notifications</h3>
@@ -101,16 +89,13 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
               <h3 className="text-lg font-medium text-zinc-600">
                 {selectedChat?.users.length} members
               </h3>
-              <i
-                onClick={() => setSearchInputHidden(!searchInputHidden)}
-                className="ri-search-line text-xl font-medium cursor-pointer"
-              ></i>
+              <i className="ri-search-line text-xl font-medium cursor-pointer"></i>
             </div>
             {selectedChat.users.length > 0
               ? selectedChat.users.map((u) => (
                   <div
                     onClick={async () => {
-                      if(u._id === user?._id){
+                      if (u._id === user?._id) {
                         return navigate("/");
                       }
                       const { chatId } = await dispatch(asyncAccessChat(u._id));
@@ -143,6 +128,29 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
                   </div>
                 ))
               : ""}
+            <div className="w-full border-b border-zinc-400 flex flex-col gap-2 px-4 py-4">
+              <div className="w-fit flex items-center gap-2 cursor-pointer">
+                <i className="ri-heart-line text-xl md:text-base font-medium text-black"></i>
+                <h3 className="text-xl md:text-base font-medium text-black">
+                  Add to Favourites
+                </h3>
+              </div>
+              <div
+                onClick={handleExitUser}
+                className="w-fit flex items-center gap-2 cursor-pointer"
+              >
+                <i className="ri-logout-box-r-line text-xl md:text-base font-medium text-red-500"></i>
+                <h3 className="text-xl md:text-base font-medium text-red-500">
+                  Exit group
+                </h3>
+              </div>
+              <div className="w-fit flex items-center gap-2 cursor-pointer">
+                <i className="ri-thumb-down-line text-xl md:text-base font-medium text-red-500"></i>
+                <h3 className="text-xl md:text-base font-medium text-red-500">
+                  Report group
+                </h3>
+              </div>
+            </div>
           </div>
         )}
       </div>

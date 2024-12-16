@@ -83,7 +83,7 @@ const SideNav = () => {
       <Chats />
       <Link
         to="/group-create"
-        className="absolute bottom-4 right-4 w-[15vw] h-[15vw] md:w-[3vw] md:h-[3vw] rounded-full flex items-center justify-center bg-zinc-600 text-white"
+        className="absolute bottom-4 right-4 w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full flex items-center justify-center bg-zinc-600 text-white"
       >
         <i className="ri-add-line text-2xl"></i>
       </Link>
