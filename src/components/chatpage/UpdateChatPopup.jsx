@@ -107,7 +107,11 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 selectedChat.users.map((u) => (
                   <div
                     key={u._id}
-                    className="w-fit px-2 py-2 flex flex-col items-center gap-2 rounded-md bg-blue-200"
+                    className={`${
+                      selectedChat.groupAdmin._id === u._id
+                        ? "bg-emerald-200"
+                        : "bg-blue-200"
+                    } w-fit px-2 py-2 flex flex-col items-center gap-2 rounded-md`}
                   >
                     <div className="relative w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] border-2 border-zinc-400 rounded-full p-[2px]">
                       <div className="w-full h-full rounded-full overflow-hidden">
