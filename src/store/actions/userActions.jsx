@@ -5,7 +5,7 @@ export const asyncLoadUser = () => async (dispatch, getState) => {
   try {
     const { data } = await axios.get("/users/current");
     if (data) {
-      dispatch(loadUser(data));
+      await dispatch(loadUser(data));
     }
   } catch (error) {
     console.log(error.response.data);
@@ -23,7 +23,7 @@ export const asyncSignUpUser =
         gender,
       });
       if (data) {
-        dispatch(asyncLoadUser());
+        await dispatch(asyncLoadUser());
       }
     } catch (error) {
       console.log(error.response.data);
@@ -39,7 +39,7 @@ export const asyncSignInUser =
         password,
       });
       if (data) {
-        dispatch(asyncLoadUser());
+        await dispatch(asyncLoadUser());
       }
     } catch (error) {
       console.log(error.response.data);
@@ -50,7 +50,7 @@ export const asyncSignOutUser = () => async (dispatch, getState) => {
   try {
     const { data } = await axios.get("/users/signout");
     if (data) {
-      dispatch(removeUser());
+      await dispatch(removeUser());
     }
   } catch (error) {
     console.log(error.response.data);
@@ -76,7 +76,7 @@ export const asyncEditProfile =
         }
       );
       if (data) {
-        dispatch(removeUser());
+        await dispatch(removeUser());
       }
     } catch (error) {
       console.log(error.response.data);
@@ -87,7 +87,7 @@ export const asyncFetchAllUser = () => async (dispatch, getState) => {
   try {
     const { data } = await axios.get("/users/");
     if (data) {
-      dispatch(setAllUser(data));
+      await dispatch(setAllUser(data));
     }
   } catch (error) {
     console.log(error.response.data);

@@ -46,8 +46,8 @@ const TopNav = () => {
           <div className="flex flex-col">
             <h1 className="text-2xl font-medium leading-none">
               {selectedChat?.isGroupChat
-                ? selectedChat?.chatName
-                : oppositeUser?.fullName}
+                ? selectedChat?.chatName.slice(0,10)
+                : oppositeUser?.fullName.slice(0,15)}
             </h1>
             <small
               className={`${

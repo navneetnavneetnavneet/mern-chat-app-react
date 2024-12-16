@@ -5,7 +5,7 @@ export const asyncFetchAllMessages = (chatId) => async (dispatch, getState) => {
   try {
     const { data } = await axios.get(`/messages/${chatId}`);
     if (data) {
-      dispatch(setMessages(data));
+      await dispatch(setMessages(data));
     }
   } catch (error) {
     console.log(error.response?.data);
@@ -21,7 +21,7 @@ export const asyncSendMessage =
         content,
       });
       if (data) {
-        dispatch(setMessages([...messages, data]));
+        await dispatch(setMessages([...messages, data]));
       }
     } catch (error) {
       console.log(error.response?.data);

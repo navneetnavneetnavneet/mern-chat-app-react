@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncAccessChat, asyncFetchAllChats } from "../../store/actions/chatActions";
+import { useNavigate } from "react-router-dom";
 
 const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  console.log(selectedChat);
+
   const { user } = useSelector((state) => state.userReducer);
 
   const oppositeUser =
@@ -9,9 +16,34 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
     selectedChat.isGroupChat === false &&
     selectedChat.users.find((u) => u._id !== user?._id);
 
+  const [searchInputHidden, setSearchInputHidden] = useState(true);
+  const [searchInput, setSearchInput] = useState("");
+
   return (
     selectedChat && (
       <div className="w-full h-screen overflow-x-hidden overflow-y-auto pb-10 text-black bg-zinc-100 absolute left-0 top-0">
+        <div
+          className={`${
+            searchInputHidden ? "hidden" : "flex"
+          } items-center fixed top-0 left-0 z-10 w-full px-4 py-1 mt-1 bg-white border border-zinc-400 rounded-full`}
+        >
+          <i className="ri-search-line text-xl font-medium"></i>
+          <input
+            onChange={(e) => setSearchInput(e.target.value)}
+            value={searchInput}
+            type="text"
+            placeholder="Search users . . ."
+            className="w-full px-4 py-2 border-none outline-none text-lg font-medium"
+          />
+          {searchInput ? (
+            <i
+              onClick={() => setSearchInput("")}
+              className="ri-close-line text-xl font-medium cursor-pointer"
+            ></i>
+          ) : (
+            ""
+          )}
+        </div>
         <div className="w-full h-[10vh] px-4 py-4 border-b border-zinc-400 flex items-center justify-between">
           <i
             onClick={() => setChatInfo(!chatInfo)}
@@ -46,7 +78,7 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
             </h3>
           )}
           {selectedChat?.isGroupChat && (
-            <h3 className="text-base font-medium text-zinc-600">
+            <h3 className="text-lg font-medium text-zinc-600">
               Group : {selectedChat?.users.length} members
             </h3>
           )}
@@ -66,27 +98,48 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
         {selectedChat.isGroupChat && (
           <div className="w-full">
             <div className="w-full px-4 py-2 flex items-center justify-between">
-              <h3 className="text-base font-medium text-zinc-600">
+              <h3 className="text-lg font-medium text-zinc-600">
                 {selectedChat?.users.length} members
               </h3>
-              <i className="ri-search-line text-xl font-medium"></i>
+              <i
+                onClick={() => setSearchInputHidden(!searchInputHidden)}
+                className="ri-search-line text-xl font-medium cursor-pointer"
+              ></i>
             </div>
             {selectedChat.users.length > 0
               ? selectedChat.users.map((u) => (
                   <div
+                    onClick={async () => {
+                      if(u._id === user?._id){
+                        return navigate("/");
+                      }
+                      const { chatId } = await dispatch(asyncAccessChat(u._id));
+                      await dispatch(asyncFetchAllChats());
+                      setChatInfo(!chatInfo);
+                      navigate(`/chat/${chatId}`);
+                    }}
                     key={u._id}
-                    className="w-full h-[10vh] px-4 py-4 border-b border-zinc-400 flex items-center gap-2"
+                    className={`w-full h-[10vh] px-4 py-4 border-b border-zinc-400 flex items-center justify-between`}
                   >
-                    <div className="w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={u.profileImage?.url}
-                        alt=""
-                      />
+                    <div className="flex items-center gap-2">
+                      <div className="w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
+                        <img
+                          className="w-full h-full object-cover"
+                          src={u.profileImage?.url}
+                          alt=""
+                        />
+                      </div>
+                      <h1 className="text-xl font-medium leading-none">
+                        {u.fullName}
+                      </h1>
                     </div>
-                    <h1 className="text-xl font-medium leading-none">
-                      {u.fullName}
-                    </h1>
+                    {selectedChat.groupAdmin._id === u._id ? (
+                      <h6 className="text-sm font-medium text-zinc-600 px-2 py-1 rounded-md bg-zinc-300">
+                        Group Admin
+                      </h6>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 ))
               : ""}

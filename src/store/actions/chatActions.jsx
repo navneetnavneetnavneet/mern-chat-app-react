@@ -5,7 +5,9 @@ export const asyncAccessChat = (userId) => async (dispatch, getState) => {
   try {
     const { data } = await axios.post("/chats", { userId });
     if (data) {
-      dispatch(setSelectedChat(data));
+      await dispatch(setSelectedChat(data));
+      await asyncFetchAllChats();
+      return { chatId: data._id };
     }
   } catch (error) {
     console.log(error.response?.data);
@@ -16,7 +18,7 @@ export const asyncFetchAllChats = () => async (dispatch, getState) => {
   try {
     const { data } = await axios.get("/chats");
     if (data) {
-      dispatch(setChats(data));
+      await dispatch(setChats(data));
     }
   } catch (error) {
     console.log(error.response?.data);
@@ -33,7 +35,7 @@ export const asyncCreateGroup =
         users,
       });
       if (data) {
-        dispatch(setChats([data, ...chats]));
+        await dispatch(setChats([data, ...chats]));
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -48,7 +50,7 @@ export const asyncRenameGroup =
         chatName,
       });
       if (data) {
-        dispatch(setSelectedChat(data));
+        await dispatch(setSelectedChat(data));
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -63,7 +65,7 @@ export const asyncAddUserToGroup =
         userId,
       });
       if (data) {
-        dispatch(setSelectedChat(data));
+        await dispatch(setSelectedChat(data));
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -78,7 +80,7 @@ export const asyncRemoveUserFromGroup =
         userId,
       });
       if (data) {
-        dispatch(setSelectedChat(data));
+        await dispatch(setSelectedChat(data));
       }
     } catch (error) {
       console.log(error.response?.data);
@@ -92,8 +94,8 @@ export const asyncExitUserFromGroup =
         chatId,
       });
       if (data) {
-        dispatch(setSelectedChat(null));
-        dispatch(asyncFetchAllChats());
+        await dispatch(setSelectedChat(null));
+        await dispatch(asyncFetchAllChats());
       }
     } catch (error) {
       console.log(error.response?.data);
