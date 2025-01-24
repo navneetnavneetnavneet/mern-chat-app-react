@@ -43,29 +43,29 @@ const EditProfile = () => {
         <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
           <i
             onClick={() => navigate("/")}
-            className="ri-arrow-left-s-line text-3xl"
+            className="ri-arrow-left-line text-2xl cursor-pointer"
           ></i>
           <h1 className="text-3xl font-semibold">Edit Profile</h1>
-          <i className="ri-settings-3-line text-3xl"></i>
+          <i className="ri-settings-3-line text-2xl cursor-pointer"></i>
         </div>
         <div className="flex flex-col items-center my-5 gap-2">
-          <div className="w-[30vw] h-[30vw] md:w-[8vw] md:h-[8vw] rounded-full overflow-hidden">
+          <div className="relative w-[30vw] h-[30vw] md:w-[8vw] md:h-[8vw]">
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-full"
               src={user.profileImage.url}
               alt=""
             />
+            <div
+              onClick={() => {
+                imageRef.current.click();
+              }}
+              className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer absolute bottom-0 left-0 bg-zinc-600"
+            >
+              <i className="ri-pencil-line text-xl text-white"></i>
+            </div>
           </div>
-          <button
-            onClick={() => {
-              imageRef.current.click();
-            }}
-            className="rounded-md px-4 py-2 text-base font-medium text-white bg-blue-500 hover:bg-blue-600"
-          >
-            Select Image
-          </button>
         </div>
-        <div className="w-full md:w-[35%] md:mx-auto px-10 py-5 rounded-md bg-white">
+        <div className="w-full md:w-[35%] md:mx-auto px-4 py-4 rounded-md">
           <h1 className="text-2xl font-semibold">User Details</h1>
           <hr className="w-full h-[1px] bg-zinc-400" />
           <form
