@@ -35,16 +35,16 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
         <div className="w-full h-[10vh] px-4 py-4 border-b border-zinc-400 flex items-center justify-between">
           <i
             onClick={() => setChatInfo(!chatInfo)}
-            className="ri-arrow-left-line text-xl cursor-pointer"
+            className="ri-arrow-left-line text-2xl cursor-pointer"
           ></i>
-          <h1 className="text-3xl md:text-2xl font-semibold">Chat Details</h1>
+          <h1 className="text-2xl md:text-3xl font-semibold">Chat Details</h1>
           <div className="flex items-center gap-5">
             <i className="ri-bookmark-line text-xl cursor-pointer"></i>
             <i className="ri-menu-line text-xl cursor-pointer"></i>
           </div>
         </div>
         <div className="flex flex-col justify-center items-center my-5">
-          <div className="w-[30vw] h-[30vw] md:w-[10vw] md:h-[10vw] rounded-full overflow-hidden">
+          <div className="w-32 h-32 rounded-full overflow-hidden">
             <img
               className="w-full h-full object-cover"
               src={
@@ -60,16 +60,11 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
               ? selectedChat?.chatName
               : oppositeUser?.fullName}
           </h1>
-          {!selectedChat?.isGroupChat && (
-            <h3 className="text-xl font-medium text-zinc-600">
-              {oppositeUser?.email}
-            </h3>
-          )}
-          {selectedChat?.isGroupChat && (
-            <h3 className="text-lg font-medium text-zinc-600">
-              Group : {selectedChat?.users.length} members
-            </h3>
-          )}
+          <h3 className="text-base font-medium text-zinc-600">
+            {!selectedChat.isGroupChat
+              ? oppositeUser?.email
+              : `Group : ${selectedChat?.users.length} members`}
+          </h3>
         </div>
         <div className="w-full flex flex-col gap-2 border-y border-zinc-400 px-4 py-4">
           <div className="flex items-center gap-2">
@@ -86,7 +81,7 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
         {selectedChat.isGroupChat && (
           <div className="w-full">
             <div className="w-full px-4 py-2 flex items-center justify-between">
-              <h3 className="text-lg font-medium text-zinc-600">
+              <h3 className="text-base font-medium text-zinc-600">
                 {selectedChat?.users.length} members
               </h3>
               <i className="ri-search-line text-xl font-medium cursor-pointer"></i>
@@ -104,10 +99,10 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
                       navigate(`/chat/${chatId}`);
                     }}
                     key={u._id}
-                    className={`w-full h-[10vh] px-4 py-4 border-b border-zinc-400 flex items-center justify-between`}
+                    className={`w-full h-[10vh] px-4 py-4  flex items-center justify-between cursor-pointer border-b border-zinc-400`}
                   >
                     <div className="flex items-center gap-2">
-                      <div className="w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
                         <img
                           className="w-full h-full object-cover"
                           src={u.profileImage?.url}
@@ -119,8 +114,8 @@ const ChatInformation = ({ selectedChat, chatInfo, setChatInfo }) => {
                       </h1>
                     </div>
                     {selectedChat.groupAdmin._id === u._id ? (
-                      <h6 className="text-sm font-medium text-zinc-600 px-2 py-1 rounded-md bg-zinc-300">
-                        Group Admin
+                      <h6 className="text-sm font-medium text-zinc-600 px-2 py-1 rounded bg-zinc-300">
+                        Admin
                       </h6>
                     ) : (
                       ""

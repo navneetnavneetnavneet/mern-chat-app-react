@@ -14,13 +14,13 @@ const Profile = () => {
       <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
         <i
           onClick={() => navigate("/")}
-          className="ri-arrow-left-s-line text-3xl"
+          className="ri-arrow-left-line text-2xl cursor-pointer"
         ></i>
-        <h1 className="text-3xl md:text-2xl font-semibold">My Profile</h1>
-        <i className="ri-settings-3-line text-3xl"></i>
+        <h1 className="text-2xl md:text-3xl font-semibold">My Profile</h1>
+        <i className="ri-settings-3-line text-2xl cursor-pointer"></i>
       </div>
       <div className="w-full px-4 py-10 flex flex-col gap-y-5 items-center justify-center">
-        <div className="w-[40vw] h-[40vw] md:w-[10vw] md:h-[10vw] rounded-full overflow-hidden">
+        <div className="w-32 h-32 rounded-full overflow-hidden">
           <img
             className="w-full h-full object-cover"
             src={user.profileImage?.url}

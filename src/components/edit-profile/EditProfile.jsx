@@ -45,11 +45,11 @@ const EditProfile = () => {
             onClick={() => navigate("/")}
             className="ri-arrow-left-line text-2xl cursor-pointer"
           ></i>
-          <h1 className="text-3xl font-semibold">Edit Profile</h1>
+          <h1 className="text-2xl md:text-3xl font-semibold">Edit Profile</h1>
           <i className="ri-settings-3-line text-2xl cursor-pointer"></i>
         </div>
         <div className="flex flex-col items-center my-5 gap-2">
-          <div className="relative w-[30vw] h-[30vw] md:w-[8vw] md:h-[8vw]">
+          <div className="relative w-32 h-32">
             <img
               className="w-full h-full object-cover rounded-full"
               src={user.profileImage.url}

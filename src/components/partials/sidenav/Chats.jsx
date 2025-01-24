@@ -26,7 +26,7 @@ const Chats = () => {
               to={`/chat/${chat._id}`}
               className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400"
             >
-              <div className="w-[12vw] h-[12vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
                   src={
@@ -38,16 +38,18 @@ const Chats = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <h1 className="text-2xl font-medium leading-none">
+                <h1 className="text-xl font-medium leading-none">
                   {!chat.isGroupChat ? chatUser.fullName : chat.chatName}
                 </h1>
-                <small
-                  className={`${
-                    isOnline ? "text-green-600" : "opacity-70"
-                  } text-lg md:text-xs font-medium leading-none`}
-                >
-                  {isOnline ? "online" : "offline"}
-                </small>
+                {!chat.isGroupChat && (
+                  <small
+                    className={`${
+                      isOnline ? "text-green-800" : "text-zinc-400"
+                    } text-sm md:text-xs font-medium leading-none`}
+                  >
+                    {isOnline ? "online" : "offline"}
+                  </small>
+                )}
               </div>
             </Link>
           );

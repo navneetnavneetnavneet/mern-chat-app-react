@@ -107,13 +107,9 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 selectedChat.users.map((u) => (
                   <div
                     key={u._id}
-                    className={`${
-                      selectedChat.groupAdmin._id === u._id
-                        ? "bg-emerald-200"
-                        : "bg-blue-200"
-                    } w-fit px-2 py-2 flex flex-col items-center gap-2 rounded-md`}
+                    className="w-20 h-24 flex-shrink-0 flex flex-col items-center justify-center gap-2 rounded-md bg-blue-200"
                   >
-                    <div className="relative w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] border-2 border-zinc-400 rounded-full p-[2px]">
+                    <div className="relative w-12 h-12 md:w-14 md:h-14 border-2 border-zinc-400 rounded-full p-[2px]">
                       <div className="w-full h-full rounded-full overflow-hidden">
                         <img
                           className="w-full h-full object-cover"
@@ -123,7 +119,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                       </div>
                       <div
                         onClick={() => handleRemoveUser(u)}
-                        className="absolute top-0 right-0 w-[6vw] h-[6vw] md:w-[1.2vw] md:h-[1.2vw] text-white rounded-full flex items-center justify-center bg-orange-500"
+                        className="absolute -top-2 -right-2 w-6 h-6 cursor-pointer text-white rounded-full flex items-center justify-center bg-orange-500"
                       >
                         <i className="ri-close-line cursor-pointer"></i>
                       </div>
@@ -175,7 +171,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                     key={user._id}
                     className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400"
                   >
-                    <div className="w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
                       <img
                         className="w-full h-full object-cover"
                         src={user.profileImage?.url}
@@ -183,7 +179,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <h1 className="text-2xl font-medium leading-none">
+                      <h1 className="text-xl font-medium leading-none">
                         {user.fullName}
                       </h1>
                     </div>

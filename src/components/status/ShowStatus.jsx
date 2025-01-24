@@ -65,14 +65,14 @@ const ShowStatus = () => {
           className="absolute top-0 left-0 w-full h-[10vh] px-4 py-4 flex items-center justify-between text-white border-b border-zinc-400"
         >
           <div className="flex items-center gap-2">
-            <div className="w-[16vw] h-[16vw] md:w-[3.5vw] md:h-[3.5vw] rounded-full overflow-hidden">
+            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
               <img
                 className="w-full h-full object-cover"
                 src={statusUser.profileImage.url}
                 alt=""
               />
             </div>
-            <h1 className="text-2xl font-medium leading-none">
+            <h1 className="text-xl font-medium leading-none">
               {statusUser.fullName}
             </h1>
           </div>
@@ -118,7 +118,7 @@ const ShowStatus = () => {
           onClick={nextStatusHandler}
           className="absolute top-0 right-0 z-[200] w-1/2 h-full"
         ></div>
-        <div className="absolute bottom-0 left-0 w-full h-[10vh] flex items-center px-2 text-white font-medium">
+        <div className="absolute bottom-0 left-0 w-full h-[10vh] flex items-center px-4 text-white font-medium">
           <form className="w-full flex items-center gap-2">
             <input
               type="text"

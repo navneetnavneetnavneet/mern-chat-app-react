@@ -55,7 +55,7 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="w-full h-[10vh] px-2">
+    <div className="w-full h-[10vh] px-4">
       <form
         onSubmit={submitHandler}
         className="w-full h-full flex items-center gap-2"
