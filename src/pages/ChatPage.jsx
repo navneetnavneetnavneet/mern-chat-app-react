@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import MessageInput from "./MessageInput";
-import TopNav from "./TopNav";
-import MessageContainer from "./MessageContainer";
+import MessageInput from "../components/chatpage/MessageInput";
+import TopNav from "../components/chatpage/TopNav";
+import MessageContainer from "../components/chatpage/MessageContainer";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedChat } from "../../store/reducers/chatSlice";
-import { asyncFetchAllMessages } from "../../store/actions/messageActions";
-import { setMessages } from "../../store/reducers/messageSlice";
-import { socketContext } from "../../context/SocketContext";
+import { setSelectedChat } from "../store/reducers/chatSlice";
+import { asyncFetchAllMessages } from "../store/actions/messageActions";
+import { setMessages } from "../store/reducers/messageSlice";
+import { socketContext } from "../context/SocketContext";
 
 const ChatPage = () => {
   const dispatch = useDispatch();

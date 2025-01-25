@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { asyncSignOutUser } from "../../store/actions/userActions";
+import { asyncSignOutUser } from "../store/actions/userActions";
 
-const Profile = () => {
+const ProfilePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -56,4 +56,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

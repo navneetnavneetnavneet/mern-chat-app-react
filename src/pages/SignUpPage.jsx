@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import background from "/background.jpg";
 import logo from "/chatlogo.png";
 import { useDispatch } from "react-redux";
-import { asyncSignUpUser } from "../../store/actions/userActions";
+import { asyncSignUpUser } from "../store/actions/userActions";
 import { useForm } from "react-hook-form";
 
-const SignUp = () => {
+const SignUpPage = () => {
   const dispatch = useDispatch();
 
   const {
@@ -198,4 +198,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

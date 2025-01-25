@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncDeleteStatus } from "../../store/actions/statusActions";
+import { asyncDeleteStatus } from "../store/actions/statusActions";
 
-const ShowStatus = () => {
+const ShowStatusPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userId } = useParams();
@@ -135,4 +135,4 @@ const ShowStatus = () => {
   );
 };
 
-export default ShowStatus;
+export default ShowStatusPage;

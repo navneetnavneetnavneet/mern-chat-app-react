@@ -1,8 +1,8 @@
 import React from "react";
-import SideNav from "../partials/sidenav/SideNav";
+import SideNav from "../components/sidenav/SideNav";
 import { useSelector } from "react-redux";
 
-const Homepage = () => {
+const HomePage = () => {
   const { user } = useSelector((state) => state.userReducer);
 
   return (
@@ -22,4 +22,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;

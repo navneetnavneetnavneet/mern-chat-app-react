@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import background from "/background.jpg";
 import logo from "/chatlogo.png";
 import { useDispatch } from "react-redux";
-import { asyncSignInUser } from "../../store/actions/userActions";
+import { asyncSignInUser } from "../store/actions/userActions";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-const SignIn = () => {
+const SignInPage = () => {
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -136,4 +136,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;

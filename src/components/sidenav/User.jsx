@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { asyncAccessChat } from "../../../store/actions/chatActions";
+import { asyncAccessChat } from "../../store/actions/chatActions";
 import { useNavigate } from "react-router-dom";
 
 const User = ({ user }) => {

@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncEditProfile } from "../../store/actions/userActions";
+import { asyncEditProfile } from "../store/actions/userActions";
 
-const EditProfile = () => {
+const EditProfilePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -144,4 +144,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditProfilePage;

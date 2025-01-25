@@ -4,7 +4,7 @@ import Status from "./Status";
 import { Link } from "react-router-dom";
 import Chats from "./Chats";
 import User from "./User";
-import axios from "../../../utils/axios";
+import axios from "../../utils/axios";
 import { useSelector } from "react-redux";
 
 const SideNav = () => {

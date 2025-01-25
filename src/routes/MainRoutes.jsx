@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import Homepage from "../components/homepage/Homepage";
-import SignUp from "../components/signup/SignUp";
-import SignIn from "../components/signin/SignIn";
-import Profile from "../components/profile/Profile";
-import ChatPage from "../components/chatpage/ChatPage";
+import HomePage from "../pages/HomePage";
+import SignUpPage from "../pages/SignUpPage";
+import SignInPage from "../pages/SignInPage";
+import ProfilePage from "../pages/ProfilePage";
+import EditProfilePage from "../pages/EditProfilePage";
+import ChatPage from "../pages/ChatPage";
+import CreateGroupPage from "../pages/CreateGroupPage";
+import ShowStatusPage from "../pages/ShowStatusPage";
+import UploadStatusPage from "../pages/UploadStatusPage";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncFetchAllUser, asyncLoadUser } from "../store/actions/userActions";
 import { asyncFetchAllChats } from "../store/actions/chatActions";
 import { setChats } from "../store/reducers/chatSlice";
-import CreateGroup from "../components/group/CreateGroup";
-import EditProfile from "../components/edit-profile/EditProfile";
 import { asyncFetchAllStatus } from "../store/actions/statusActions";
 import { setAllStatus } from "../store/reducers/statusSlice";
-import UploadStatus from "../components/status/UploadStatus";
-import ShowStatus from "../components/status/ShowStatus";
 import { setAllUser } from "../store/reducers/userSlice";
 
 const MainRoutes = () => {
@@ -45,15 +45,15 @@ const MainRoutes = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/edit" element={<EditProfile />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/edit" element={<EditProfilePage />} />
         <Route path="/chat/:chatId" element={<ChatPage />} />
-        <Route path="/group-create" element={<CreateGroup />} />
-        <Route path="/status/:userId" element={<ShowStatus />} />
-        <Route path="/status/upload" element={<UploadStatus />} />
+        <Route path="/group-create" element={<CreateGroupPage />} />
+        <Route path="/status/:userId" element={<ShowStatusPage />} />
+        <Route path="/status/upload" element={<UploadStatusPage />} />
       </Routes>
     </>
   );

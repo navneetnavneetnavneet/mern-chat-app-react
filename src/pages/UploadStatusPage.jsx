@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncUploadStatus } from "../../store/actions/statusActions";
+import { asyncUploadStatus } from "../store/actions/statusActions";
 
-const UploadStatus = () => {
+const UploadStatusPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -63,4 +63,4 @@ const UploadStatus = () => {
   );
 };
 
-export default UploadStatus;
+export default UploadStatusPage;
