@@ -3,8 +3,8 @@ import axios from "../../utils/axios";
 
 export const asyncLoadUser = () => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get("/users/current");
-    if (data) {
+    const { data, status } = await axios.get("/users/current");
+    if (data && status === 200) {
       await dispatch(loadUser(data));
     }
   } catch (error) {
@@ -12,17 +12,32 @@ export const asyncLoadUser = () => async (dispatch, getState) => {
   }
 };
 
+export const asyncSendOtp = (email) => async (dispatch, getState) => {
+  try {
+    const { data, status } = await axios.post("/users/send-otp", { email });
+    console.log(data);
+
+    if (data && status === 200) {
+      return data.otp;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
 export const asyncSignUpUser =
-  ({ fullName, email, password, gender }) =>
+  ({ fullName, email, password, gender, dateOfBirth, otp }) =>
   async (dispatch, getState) => {
     try {
-      const { data } = await axios.post("/users/signup", {
+      const { data, status } = await axios.post("/users/signup", {
         fullName,
         email,
         password,
         gender,
+        dateOfBirth,
+        otp,
       });
-      if (data) {
+      if (data && status === 201) {
         await dispatch(asyncLoadUser());
       }
     } catch (error) {
@@ -34,11 +49,11 @@ export const asyncSignInUser =
   ({ email, password }) =>
   async (dispatch, getState) => {
     try {
-      const { data } = await axios.post("/users/signin", {
+      const { data, status } = await axios.post("/users/signin", {
         email,
         password,
       });
-      if (data) {
+      if (data && status === 200) {
         await dispatch(asyncLoadUser());
       }
     } catch (error) {
@@ -48,8 +63,8 @@ export const asyncSignInUser =
 
 export const asyncSignOutUser = () => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get("/users/signout");
-    if (data) {
+    const { data, status } = await axios.get("/users/signout");
+    if (data && status === 200) {
       await dispatch(removeUser());
     }
   } catch (error) {
@@ -61,7 +76,7 @@ export const asyncEditProfile =
   ({ fullName, email, gender, profileImage }) =>
   async (dispatch, getState) => {
     try {
-      const { data } = await axios.post(
+      const { data, status } = await axios.post(
         "/users/edit",
         {
           fullName,
@@ -75,8 +90,9 @@ export const asyncEditProfile =
           },
         }
       );
-      if (data) {
-        await dispatch(removeUser());
+
+      if (data && status === 200) {
+        await dispatch(asyncLoadUser());
       }
     } catch (error) {
       console.log(error.response.data);
@@ -85,8 +101,8 @@ export const asyncEditProfile =
 
 export const asyncFetchAllUser = () => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get("/users/");
-    if (data) {
+    const { data, status } = await axios.get("/users/");
+    if (data && status === 200) {
       await dispatch(setAllUser(data));
     }
   } catch (error) {

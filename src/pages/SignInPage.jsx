@@ -19,8 +19,8 @@ const SignInPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    dispatch(asyncSignInUser(data));
+  const onSubmit = async (data) => {
+    await dispatch(asyncSignInUser(data));
 
     reset();
   };
@@ -34,31 +34,31 @@ const SignInPage = () => {
       }}
       className="w-full h-screen flex items-center justify-center bg-zinc-100 px-4 py-4"
     >
-      <div className="w-full md:w-[35%] px-10 py-5 rounded-md bg-white">
+      <div className="w-full md:w-[30%] py-5 bg-white rounded-xl">
         <div className="flex flex-col items-center">
-          <div className="w-[16vw] h-[16vw] md:w-[5vw] md:h-[5vw]">
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
             <img className="w-full h-full object-cover" src={logo} alt="" />
           </div>
           <h1 className="text-2xl font-bold">
-            Welcome back to <span className="text-blue-600">Chat</span>
+            Welcome to <span className="text-blue-600">Chat</span>
             <span className="text-orange-600">X</span>
           </h1>
-          <h4 className="text-center mt-3 text-base font-medium leading-none opacity-50">
+          <p className="text-center text-sm mt-1 md:text-base font-medium opacity-70 leading-none md:leading-5">
             Please enter your details to sign in.
-          </h4>
+          </p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-y-3 mt-5 text-xl font-medium md:text-base"
+          className="w-full flex flex-col gap-y-3 mt-5 px-4 py-2 font-medium"
         >
           <div>
-            <label htmlFor="email" className=" opacity-80">
+            <label htmlFor="email" className="text-xl md:text-lg opacity-80">
               Email
             </label>
             <input
               type="email"
               placeholder="Enter email"
-              className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
+              className="w-full px-4 py-2 rounded-md outline-none border border-zinc-400 bg-zinc-100 text-base font-medium"
               {...register("email", { required: true })}
             />
             {errors.email && errors.email.type === "required" ? (
@@ -70,14 +70,14 @@ const SignInPage = () => {
             )}
           </div>
           <div>
-            <label htmlFor="password" className=" opacity-80">
+            <label htmlFor="password" className="text-xl md:text-lg opacity-80">
               Password
             </label>
-            <div className="w-full flex items-center justify-between rounded-md mt-1 bg-zinc-100 border border-zinc-400">
+            <div className="w-full flex items-center justify-between rounded-md bg-zinc-100 border border-zinc-400">
               <input
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
-                className="w-full px-2 py-2 rounded-md border-none bg-zinc-100 border-zinc-400 outline-none "
+                className="w-full px-4 py-2 rounded-md outline-none bg-zinc-100 text-base font-medium"
                 {...register("password", {
                   required: true,
                   minLength: 6,
@@ -117,17 +117,17 @@ const SignInPage = () => {
             ) : (
               ""
             )}
-            <Link className="w-full inline-block text-end mt-1 text-blue-600 text-sm">
+            <Link className="w-full inline-block text-end mt-1 text-sm text-blue-600 font-medium">
               Forger Password ?
             </Link>
           </div>
-          <button className="w-full px-4 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600">
+          <button className="w-full px-4 py-2 rounded-md text-base text-white bg-blue-500 hover:bg-blue-600">
             Sign In
           </button>
         </form>
-        <p className="w-full text-center my-3 text-lg md:text-sm font-medium">
+        <p className="text-center mt-3 text-sm">
           Don't have an account ?{" "}
-          <Link to="/signup" className="text-blue-600">
+          <Link to="/signup" className="text-blue-600 font-medium">
             Sign Up
           </Link>
         </p>

@@ -31,7 +31,7 @@ const Chats = () => {
                   className="w-full h-full object-cover"
                   src={
                     !chat.isGroupChat
-                      ? chatUser.profileImage.url
+                      ? chatUser?.profileImage?.url
                       : "https://images.unsplash.com/photo-1730724620244-40d6e978acd8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1N3x8fGVufDB8fHx8fA%3D%3D"
                   }
                   alt=""
@@ -39,7 +39,7 @@ const Chats = () => {
               </div>
               <div className="flex flex-col">
                 <h1 className="text-xl font-medium leading-none">
-                  {!chat.isGroupChat ? chatUser.fullName : chat.chatName}
+                  {!chat.isGroupChat ? chatUser?.fullName : chat.chatName}
                 </h1>
                 {!chat.isGroupChat && (
                   <small

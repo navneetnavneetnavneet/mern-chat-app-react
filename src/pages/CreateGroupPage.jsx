@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "../utils/axios";
 import { toast } from "react-toastify";
@@ -86,19 +86,19 @@ const CreateGroupPage = () => {
       </div>
 
       <div className="w-full md:w-[35%] md:mx-auto mt-5 px-4 py-4">
-        <h1 className="mb-5 px-2 py-2 rounded-md bg-orange-400 text-white text-3xl md:text-2xl font-semibold w-full text-center">
-          Group details
+        <h1 className="mb-5 px-2 py-2 rounded-md bg-orange-400 text-white text-2xl md:text-2xl font-semibold w-full text-center">
+          Group Details
         </h1>
         <form
           onSubmit={submitHandler}
-          className="w-full flex flex-col gap-3 text-xl md:text-base font-medium"
+          className="w-full flex flex-col gap-3 font-medium"
         >
           <input
             onChange={(e) => setChatName(e.target.value)}
             value={chatName}
             type="text"
             placeholder="Group name"
-            className="w-full px-2 py-2 rounded-md outline-none border border-zinc-400"
+            className="w-full px-2 py-2 rounded-md outline-none text-base border border-zinc-400"
           />
           <div className="w-full px-2 rounded-md border border-zinc-400 bg-white flex items-center">
             <input
@@ -106,12 +106,12 @@ const CreateGroupPage = () => {
               value={search}
               type="text"
               placeholder="Search . . ."
-              className="w-full py-2 outline-none "
+              className="w-full py-2 outline-none text-base"
             />
             {search ? (
               <i
                 onClick={() => setSearch("")}
-                className="ri-close-line cursor-pointer"
+                className="ri-close-line cursor-pointer text-base"
               ></i>
             ) : (
               ""
@@ -157,27 +157,32 @@ const CreateGroupPage = () => {
                   key={user._id}
                   className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400 cursor-pointer"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
+                  <div className="relative w-12 h-12 md:w-14 md:h-14">
                     <img
-                      className="w-full h-full object-cover"
+                      className="w-full h-full rounded-full object-cover"
                       src={user.profileImage?.url}
                       alt=""
                     />
+                    {slectedUsers.includes(user) && (
+                      <div className="absolute -bottom-1 right-0 w-6 h-6 cursor-pointer text-white rounded-full flex items-center justify-center bg-zinc-500">
+                        <i className="ri-check-fill font-medium"></i>
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-2xl font-medium leading-none">
+                    <h1 className="text-xl font-medium leading-none">
                       {user.fullName}
                     </h1>
                   </div>
                 </div>
               ))
             ) : (
-              <h1 className="text-xl w-full text-center py-5">
+              <h1 className="text-base w-full text-center py-5">
                 Please wait . . .
               </h1>
             )}
           </div>
-          <button className="w-full px-2 py-2 mt-3 rounded-md outline-none text-white bg-blue-500 hover:bg-blue-600">
+          <button className="w-full px-2 py-2 mt-3 rounded-md outline-none text-white text-base bg-blue-500 hover:bg-blue-600">
             Create group
           </button>
         </form>

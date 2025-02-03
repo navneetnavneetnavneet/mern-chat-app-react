@@ -19,7 +19,7 @@ const User = ({ user }) => {
         <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
           <img
             className="w-full h-full object-cover"
-            src={user.profileImage}
+            src={user.profileImage.url}
             alt=""
           />
         </div>

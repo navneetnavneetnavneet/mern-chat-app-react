@@ -16,14 +16,14 @@ const Message = ({ message }) => {
       <div
         ref={scrollRef}
         className={`${
-          message.senderId._id === user?._id
+          message.senderId?._id === user?._id
             ? "ml-auto"
             : "mr-auto flex-row-reverse"
         } w-fit gap-1 flex items-start justify-between mb-4`}
       >
         <div
           className={`flex flex-col ${
-            message.senderId._id === user?._id ? "items-end" : "items-start"
+            message.senderId?._id === user?._id ? "items-end" : "items-start"
           }`}
         >
           {message.media && message.media.url !== "" && (
@@ -60,7 +60,7 @@ const Message = ({ message }) => {
             </div>
           )}
           {message.content?.trim() !== "" && (
-            <p className="w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md bg-blue-600 text-white text-lg md:text-base font-normal leading-tight">
+            <p className="w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md bg-blue-600 text-white text-lg md:text-base font-medium leading-tight">
               {message.content?.trim()}
             </p>
           )}
@@ -74,7 +74,7 @@ const Message = ({ message }) => {
         <div className="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 rounded-full  overflow-hidden">
           <img
             className="w-full h-full object-cover"
-            src={message.senderId.profileImage.url}
+            src={message.senderId?.profileImage.url}
             alt=""
           />
         </div>

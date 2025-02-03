@@ -54,7 +54,7 @@ const UploadStatusPage = () => {
             ref={imageRef}
             onChange={(e) => setMedia(e.target.files[0])}
           />
-          <button className="px-4 py-2 w-full rounded-md outline-none bg-blue-500 hover:bg-blue-600 text-white font-medium">
+          <button className="px-4 py-2 w-full rounded-md outline-none bg-blue-500 hover:bg-blue-600 text-white text-base font-medium">
             Upload Status
           </button>
         </form>

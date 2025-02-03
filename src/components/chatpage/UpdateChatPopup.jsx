@@ -99,7 +99,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
               onClick={() => setHidden(!hidden)}
               className="ri-close-line text-2xl cursor-pointer w-full text-end"
             ></i>
-            <h1 className="mb-5 md:mb-2 px-2 py-2 rounded-md bg-orange-400 text-white text-3xl md:text-2xl font-semibold w-full text-center">
+            <h1 className="mb-5 md:mb-2 px-2 py-2 rounded-md bg-orange-400 text-white text-2xl font-semibold w-full text-center">
               {selectedChat.chatName}
             </h1>
             <div className="status w-full flex gap-5 overflow-x-auto overflow-y-hidden">
@@ -139,9 +139,9 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 value={chatName}
                 type="text"
                 placeholder="Group name"
-                className="w-full px-2 py-2 rounded-md text-black outline-none border border-zinc-400"
+                className="w-full px-2 py-2 rounded-md text-black text-base outline-none border border-zinc-400"
               />
-              <button className="px-2 py-2 rounded-md outline-none text-white bg-green-700 hover:bg-green-800">
+              <button className="px-2 py-2 rounded-md text-base outline-none text-white bg-green-700 hover:bg-green-800">
                 Update
               </button>
             </form>
@@ -151,7 +151,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 value={search}
                 type="text"
                 placeholder="Search . . ."
-                className="w-full py-2 outline-none text-black"
+                className="w-full py-2 text-base outline-none text-black"
               />
               {search ? (
                 <i
@@ -193,7 +193,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
             </div>
             <button
               onClick={handleExitUser}
-              className="px-2 py-2 rounded-md outline-none text-white font-medium bg-red-500 hover:bg-red-600"
+              className="px-2 py-2 rounded-md outline-none text-white text-base font-medium bg-red-500 hover:bg-red-600"
             >
               Exit group
             </button>

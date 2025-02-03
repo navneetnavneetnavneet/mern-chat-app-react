@@ -36,15 +36,15 @@ const ProfilePage = () => {
             to="/edit"
             className="px-4 py-2 flex items-center gap-1 rounded-md bg-blue-600 text-white font-medium"
           >
-            <i className="ri-pencil-line"></i>
-            <span className="text-lg">Edit Profile</span>
+            <i className="ri-pencil-line text-base"></i>
+            <span className="text-base">Edit Profile</span>
           </Link>
           <div
             onClick={() => dispatch(asyncSignOutUser())}
             className="px-4 py-2 w-fit flex items-center gap-1 rounded-md bg-red-600 cursor-pointer text-white font-medium"
           >
-            <i className="ri-logout-box-line text-lg"></i>
-            <span className="text-lg">Logout</span>
+            <i className="ri-logout-box-line text-base"></i>
+            <span className="text-base">Logout</span>
           </div>
         </div>
       </div>

@@ -70,16 +70,17 @@ const EditProfilePage = () => {
           <hr className="w-full h-[1px] bg-zinc-400" />
           <form
             onSubmit={submitHandler}
-            className="w-full flex flex-col gap-y-3 mt-5 text-xl font-medium md:text-base"
+            className="w-full flex flex-col gap-y-3 mt-5 font-medium"
           >
             <input
               hidden
               ref={imageRef}
+              accept="image/*"
               onChange={(e) => setProfileImage(e.target.files[0])}
               type="file"
             />
             <div>
-              <label htmlFor="fullname" className=" opacity-80">
+              <label htmlFor="fullname" className="text-xl md:text-base opacity-80">
                 Full name
               </label>
               <input
@@ -87,11 +88,11 @@ const EditProfilePage = () => {
                 value={fullName}
                 type="text"
                 placeholder="Enter full name"
-                className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
+                className="w-full px-2 py-2 rounded-md bg-zinc-100 border border-zinc-400 outline-none "
               />
             </div>
             <div>
-              <label htmlFor="email" className=" opacity-80">
+              <label htmlFor="email" className="text-xl md:text-base opacity-80">
                 Email
               </label>
               <input
@@ -99,7 +100,7 @@ const EditProfilePage = () => {
                 value={email}
                 type="email"
                 placeholder="Enter email"
-                className="w-full px-2 py-2 rounded-md mt-1  bg-zinc-100 border border-zinc-400 outline-none "
+                className="w-full px-2 py-2 rounded-md bg-zinc-100 border border-zinc-400 outline-none "
               />
             </div>
             <div className="flex items-center gap-5">
@@ -111,7 +112,7 @@ const EditProfilePage = () => {
                   onChange={(e) => setGender(e.target.value)}
                   checked={gender === "male"}
                 />
-                <span className="text-lg md:text-base opacity-80">Male</span>
+                <span className="text-lg md:text-basetext-xl md:text-base opacity-80">Male</span>
               </div>
               <div className="flex items-center gap-1">
                 <input
@@ -121,7 +122,7 @@ const EditProfilePage = () => {
                   onChange={(e) => setGender(e.target.value)}
                   checked={gender === "female"}
                 />
-                <span className="text-lg md:text-base opacity-80">Female</span>
+                <span className="text-lg md:text-basetext-xl md:text-base opacity-80">Female</span>
               </div>
               <div className="flex items-center gap-1">
                 <input
@@ -131,10 +132,10 @@ const EditProfilePage = () => {
                   onChange={(e) => setGender(e.target.value)}
                   checked={gender === "other"}
                 />
-                <span className="text-lg md:text-base opacity-80">Other</span>
+                <span className="text-lg md:text-basetext-xl md:text-base opacity-80">Other</span>
               </div>
             </div>
-            <button className="w-full px-4 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600">
+            <button className="w-full px-4 py-2 rounded-md text-white text-base bg-blue-500 hover:bg-blue-600">
               Update Profile
             </button>
           </form>

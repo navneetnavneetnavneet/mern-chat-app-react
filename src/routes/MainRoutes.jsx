@@ -21,16 +21,13 @@ const MainRoutes = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isAuthenticated } = useSelector((state) => state.userReducer);
+  const { isAuthenticated } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     dispatch(asyncLoadUser());
-
-    if (isAuthenticated) {
-      dispatch(asyncFetchAllChats());
-      dispatch(asyncFetchAllStatus());
-      dispatch(asyncFetchAllUser());
-    }
+    dispatch(asyncFetchAllChats());
+    dispatch(asyncFetchAllStatus());
+    dispatch(asyncFetchAllUser());
 
     isAuthenticated && navigate("/");
     !isAuthenticated && navigate("/signin");
