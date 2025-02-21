@@ -117,7 +117,7 @@ const SignInPage = () => {
             ) : (
               ""
             )}
-            <Link className="w-full inline-block text-end mt-1 text-sm text-blue-600 font-medium">
+            <Link to="/forgot-password" className="w-full inline-block text-end mt-1 text-sm text-blue-600 font-medium">
               Forger Password ?
             </Link>
           </div>

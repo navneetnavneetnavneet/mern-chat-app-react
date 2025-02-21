@@ -16,7 +16,7 @@ const User = ({ user }) => {
         }}
         className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 cursor-pointer border-b border-zinc-400"
       >
-        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
+        <div className="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 rounded-full overflow-hidden">
           <img
             className="w-full h-full object-cover"
             src={user.profileImage.url}

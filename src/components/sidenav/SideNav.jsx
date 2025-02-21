@@ -78,7 +78,6 @@ const SideNav = () => {
           allStatus.map((status) => (
             <Status key={status._id} user={status.user} />
           ))}
-        <Status />
       </div>
       <Chats />
       <Link

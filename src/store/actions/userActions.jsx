@@ -72,6 +72,36 @@ export const asyncSignOutUser = () => async (dispatch, getState) => {
   }
 };
 
+export const asyncForgotPassword = (email) => async (dispatch, getState) => {
+  try {
+    const { data, status } = await axios.post("/users/forgot-password", {
+      email,
+    });
+
+    if (data && status === 200) {
+      return data;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
+export const asyncResetPassword =
+  (password, resetToken) => async (dispatch, getState) => {
+    try {
+      const { data, status } = await axios.post(
+        `/users/reset-password/${resetToken}`,
+        { password }
+      );
+
+      if (data && status === 200) {
+        return data;
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
 export const asyncEditProfile =
   ({ fullName, email, gender, profileImage }) =>
   async (dispatch, getState) => {

@@ -16,6 +16,8 @@ import { setChats } from "../store/reducers/chatSlice";
 import { asyncFetchAllStatus } from "../store/actions/statusActions";
 import { setAllStatus } from "../store/reducers/statusSlice";
 import { setAllUser } from "../store/reducers/userSlice";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -51,6 +53,8 @@ const MainRoutes = () => {
         <Route path="/group-create" element={<CreateGroupPage />} />
         <Route path="/status/:userId" element={<ShowStatusPage />} />
         <Route path="/status/upload" element={<UploadStatusPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPasswordPage />} />
       </Routes>
     </>
   );
