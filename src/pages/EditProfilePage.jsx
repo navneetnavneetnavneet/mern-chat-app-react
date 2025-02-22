@@ -34,18 +34,20 @@ const EditProfilePage = () => {
     };
 
     await dispatch(asyncEditProfile(userData));
-    navigate("/");
+    navigate("/profile");
   };
 
   return (
     user && (
       <div className="w-full h-screen bg-zinc-100">
-        <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
+        <div className="w-full px-4 md:px-8 py-2 border-b border-zinc-400 flex items-center justify-between">
           <i
-            onClick={() => navigate("/")}
-            className="ri-arrow-left-line text-2xl cursor-pointer"
+            onClick={() => navigate("/profile")}
+            className="ri-arrow-left-line text-[1.2rem] cursor-pointer"
           ></i>
-          <h1 className="text-2xl md:text-3xl font-semibold">Edit Profile</h1>
+          <h1 className="text-[1.5rem] md:text-[1.75rem] font-semibold">
+            Edit Profile
+          </h1>
           <i className="ri-settings-3-line text-2xl cursor-pointer"></i>
         </div>
         <div className="flex flex-col items-center my-5 gap-2">
@@ -59,15 +61,15 @@ const EditProfilePage = () => {
               onClick={() => {
                 imageRef.current.click();
               }}
-              className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer absolute bottom-0 left-0 bg-zinc-600"
+              className="w-[2.5rem] h-[2.5rem] rounded-full flex items-center justify-center cursor-pointer absolute bottom-0 left-0 bg-zinc-600"
             >
               <i className="ri-pencil-line text-xl text-white"></i>
             </div>
           </div>
         </div>
-        <div className="w-full md:w-[35%] md:mx-auto px-4 py-4 rounded-md">
-          <h1 className="text-2xl font-semibold">User Details</h1>
-          <hr className="w-full h-[1px] bg-zinc-400" />
+        <div className="w-full md:w-[50vw] lg:w-[30vw] mx-auto px-4 py-4 rounded-md">
+          <h1 className="text-[1.5rem] mb-1 font-semibold">User Details</h1>
+          <hr className="w-full h-[1px] md:h-[2px] bg-zinc-400" />
           <form
             onSubmit={submitHandler}
             className="w-full flex flex-col gap-y-3 mt-5 font-medium"
@@ -80,7 +82,10 @@ const EditProfilePage = () => {
               type="file"
             />
             <div>
-              <label htmlFor="fullname" className="text-xl md:text-base opacity-80">
+              <label
+                htmlFor="fullname"
+                className="text-xl md:text-base opacity-80"
+              >
                 Full name
               </label>
               <input
@@ -92,7 +97,10 @@ const EditProfilePage = () => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="text-xl md:text-base opacity-80">
+              <label
+                htmlFor="email"
+                className="text-xl md:text-base opacity-80"
+              >
                 Email
               </label>
               <input
@@ -112,7 +120,9 @@ const EditProfilePage = () => {
                   onChange={(e) => setGender(e.target.value)}
                   checked={gender === "male"}
                 />
-                <span className="text-lg md:text-basetext-xl md:text-base opacity-80">Male</span>
+                <span className="text-[1.2rem] md:text-[1rem] opacity-80">
+                  Male
+                </span>
               </div>
               <div className="flex items-center gap-1">
                 <input
@@ -122,7 +132,9 @@ const EditProfilePage = () => {
                   onChange={(e) => setGender(e.target.value)}
                   checked={gender === "female"}
                 />
-                <span className="text-lg md:text-basetext-xl md:text-base opacity-80">Female</span>
+                <span className="text-[1.2rem] md:text-[1rem] opacity-80">
+                  Female
+                </span>
               </div>
               <div className="flex items-center gap-1">
                 <input
@@ -132,7 +144,9 @@ const EditProfilePage = () => {
                   onChange={(e) => setGender(e.target.value)}
                   checked={gender === "other"}
                 />
-                <span className="text-lg md:text-basetext-xl md:text-base opacity-80">Other</span>
+                <span className="text-[1.2rem] md:text-[1rem] opacity-80">
+                  Other
+                </span>
               </div>
             </div>
             <button className="w-full px-4 py-2 rounded-md text-white text-base bg-blue-500 hover:bg-blue-600">

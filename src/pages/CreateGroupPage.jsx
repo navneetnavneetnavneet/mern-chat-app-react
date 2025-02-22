@@ -76,17 +76,19 @@ const CreateGroupPage = () => {
 
   return (
     <div className="w-full h-screen bg-zinc-100">
-      <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
+      <div className="w-full px-4 md:px-8 py-2 border-b border-zinc-400 flex items-center justify-between">
         <i
           onClick={() => navigate("/")}
-          className="ri-arrow-left-line text-2xl cursor-pointer"
+          className="ri-arrow-left-line text-[1.2rem] cursor-pointer"
         ></i>
-        <h1 className="text-2xl md:text-3xl font-semibold">New Group</h1>
+        <h1 className="text-[1.5rem] md:text-[1.75rem] font-semibold">
+          New Group
+        </h1>
         <i className="ri-settings-3-line text-2xl cursor-pointer"></i>
       </div>
 
-      <div className="w-full md:w-[35%] md:mx-auto mt-5 px-4 py-4">
-        <h1 className="mb-5 px-2 py-2 rounded-md bg-orange-400 text-white text-2xl md:text-2xl font-semibold w-full text-center">
+      <div className="w-full  md:w-[50vw] lg:w-[30vw] mx-auto mt-5 px-4 py-4">
+        <h1 className="mb-5 px-2 py-2 rounded-md bg-orange-400 text-white text-[1.25rem] md:text-[1.5rem] font-bold w-full text-center">
           Group Details
         </h1>
         <form
@@ -100,7 +102,8 @@ const CreateGroupPage = () => {
             placeholder="Group name"
             className="w-full px-2 py-2 rounded-md outline-none text-base border border-zinc-400"
           />
-          <div className="w-full px-2 rounded-md border border-zinc-400 bg-white flex items-center">
+          <div className="w-full px-2 rounded-md border border-zinc-400 bg-white flex gap-2 items-center">
+            <i className="ri-search-line text-[1.2rem]"></i>
             <input
               onChange={(e) => setSearch(e.target.value)}
               value={search}
@@ -122,9 +125,9 @@ const CreateGroupPage = () => {
               slectedUsers.map((u) => (
                 <div
                   key={u._id}
-                  className="w-20 h-24 flex-shrink-0 flex flex-col items-center justify-center gap-2 rounded-md bg-blue-200"
+                  className="w-20 py-4 flex-shrink-0 flex flex-col items-center justify-center gap-2 rounded-md bg-blue-200"
                 >
-                  <div className="relative w-12 h-12 md:w-14 md:h-14 border-2 border-zinc-400 rounded-full p-[2px]">
+                  <div className="relative w-14 h-14 md:w-16 md:h-16 border-2 border-zinc-400 rounded-full p-[2px]">
                     <div className="w-full h-full rounded-full overflow-hidden">
                       <img
                         className="w-full h-full object-cover"
@@ -134,12 +137,12 @@ const CreateGroupPage = () => {
                     </div>
                     <div
                       onClick={() => handleRemoveUser(u)}
-                      className="absolute -top-2 -right-2 w-6 h-6 cursor-pointer text-white rounded-full flex items-center justify-center bg-orange-500"
+                      className="absolute top-0 -right-2 w-[1.6rem] h-[1.6rem] cursor-pointer text-white rounded-full flex items-center justify-center bg-orange-500"
                     >
-                      <i className="ri-close-line cursor-pointer"></i>
+                      <i className="ri-close-line text-[1.2rem] cursor-pointer"></i>
                     </div>
                   </div>
-                  <p className="text-lg md:text-base leading-none md:leading-3">
+                  <p className="text-[1rem] leading-none md:leading-3">
                     {u.fullName?.split(" ")[0]}
                   </p>
                 </div>
@@ -155,29 +158,29 @@ const CreateGroupPage = () => {
                 <div
                   onClick={() => handleAddUser(user)}
                   key={user._id}
-                  className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400 cursor-pointer"
+                  className="user relative w-full px-4 py-2 flex items-center gap-2 border-b border-zinc-400 cursor-pointer"
                 >
-                  <div className="relative w-12 h-12 md:w-14 md:h-14">
+                  <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden">
                     <img
-                      className="w-full h-full rounded-full object-cover"
+                      className="w-full h-full object-cover"
                       src={user.profileImage?.url}
                       alt=""
                     />
-                    {slectedUsers.includes(user) && (
-                      <div className="absolute -bottom-1 right-0 w-6 h-6 cursor-pointer text-white rounded-full flex items-center justify-center bg-zinc-500">
-                        <i className="ri-check-fill font-medium"></i>
-                      </div>
-                    )}
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-xl font-medium leading-none">
+                    <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
                       {user.fullName}
                     </h1>
                   </div>
+                  {slectedUsers.includes(user) && (
+                    <div className="absolute right-4 w-[1.5rem] h-[1.5rem] cursor-pointer text-white rounded-full flex items-center justify-center bg-zinc-500">
+                      <i className="ri-check-fill text-[1.2rem] font-medium"></i>
+                    </div>
+                  )}
                 </div>
               ))
             ) : (
-              <h1 className="text-base w-full text-center py-5">
+              <h1 className="text-[1rem] w-full opacity-50 text-center py-5">
                 Please wait . . .
               </h1>
             )}

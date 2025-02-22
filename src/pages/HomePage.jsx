@@ -9,11 +9,11 @@ const HomePage = () => {
     user && (
       <div className="w-full h-screen flex bg-zinc-300">
         <SideNav />
-        <div className="w-[75%] h-full hidden md:flex flex-col items-center justify-center">
-          <h1 className="text-5xl font-bold opacity-50">
+        <div className="sm:w-[50vw] md:w-[60vw] lg:w-[70vw] px-4 h-full text-center hidden sm:flex flex-col gap-3 items-center justify-center">
+          <h1 className="sm:text-[2rem] md:text-[3rem] lg:text-[4rem] leading-none font-bold opacity-50">
             Hello, {user.fullName} !
           </h1>
-          <h4 className="text-2xl font-semibold italic opacity-40">
+          <h4 className="sm:text-[1.3rem] md:text-[1.5rem] lg:text-[2rem] font-semibold leading-none italic opacity-40">
             Let's start conversation.
           </h4>
         </div>

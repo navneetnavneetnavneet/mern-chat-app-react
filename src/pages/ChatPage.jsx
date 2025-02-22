@@ -40,7 +40,7 @@ const ChatPage = () => {
   }, [messages, dispatch]);
 
   return (
-    <div className="w-full h-screen bg-zinc-800">
+    <div className="relative w-full h-screen bg-zinc-800">
       <TopNav />
       <MessageContainer />
       <MessageInput />

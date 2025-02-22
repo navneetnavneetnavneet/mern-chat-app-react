@@ -32,18 +32,18 @@ const SignInPage = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="w-full h-screen flex items-center justify-center bg-zinc-100 px-4 py-4"
+      className="w-full h-screen flex items-center justify-center bg-zinc-100 px-4 sm:px-8 py-4"
     >
-      <div className="w-full md:w-[30%] py-5 bg-white rounded-xl">
+      <div className="w-full md:w-[50vw] lg:w-[30vw] py-5 bg-white rounded-xl">
         <div className="flex flex-col items-center">
-          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
+          <div className="w-14 h-14 md:w-16 md:h-16 border border-zinc-400 rounded-full overflow-hidden">
             <img className="w-full h-full object-cover" src={logo} alt="" />
           </div>
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-center text-[1.75rem] md:text-[2rem] leading-none font-bold">
             Welcome to <span className="text-blue-600">Chat</span>
             <span className="text-orange-600">X</span>
           </h1>
-          <p className="text-center text-sm mt-1 md:text-base font-medium opacity-70 leading-none md:leading-5">
+          <p className="text-center text-[1rem] md:text-base font-medium opacity-80">
             Please enter your details to sign in.
           </p>
         </div>
@@ -117,7 +117,10 @@ const SignInPage = () => {
             ) : (
               ""
             )}
-            <Link to="/forgot-password" className="w-full inline-block text-end mt-1 text-sm text-blue-600 font-medium">
+            <Link
+              to="/forgot-password"
+              className="w-full inline-block text-end mt-1 text-[1rem] text-blue-600 font-medium"
+            >
               Forger Password ?
             </Link>
           </div>
@@ -125,7 +128,7 @@ const SignInPage = () => {
             Sign In
           </button>
         </form>
-        <p className="text-center mt-3 text-sm">
+        <p className="text-center mt-3 text-[1rem">
           Don't have an account ?{" "}
           <Link to="/signup" className="text-blue-600 font-medium">
             Sign Up

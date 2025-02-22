@@ -42,7 +42,7 @@ const SideNav = () => {
   // console.log(users);
 
   return (
-    <div className="relative w-full md:w-[25%] h-full bg-zinc-100">
+    <div className="relative w-full sm:w-[50vw] md:w-[40vw] lg:w-[30vw] h-full bg-zinc-100">
       <TopNav />
       <div className="relative w-full px-4 my-2">
         <div className="w-full flex items-center rounded-md border border-zinc-400 px-2 text-xl font-medium">
@@ -61,18 +61,18 @@ const SideNav = () => {
             <></>
           )}
         </div>
-        <div className="absolute left-0 top-[120%] z-[1000] w-full max-h-[50vh] rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto">
+        <div className="absolute left-0 top-[120%] z-[1000] w-full max-h-[70vh] rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto">
           {!loading ? (
             users.length > 0 &&
             users.map((user) => <User key={user._id} user={user} />)
           ) : (
-            <h1 className="text-xl w-full text-center py-5">
+            <h1 className="text-[1rem] font-medium opacity-50 w-full text-center py-5">
               Please wait . . .
             </h1>
           )}
         </div>
       </div>
-      <div className="status w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400 overflow-x-auto overflow-y-hidden">
+      <div className="status w-full px-4 py-2 flex items-center gap-3 border-b border-zinc-400 overflow-x-auto overflow-y-hidden">
         {user?.status?.length === 0 ? <Status user={user} /> : ""}
         {allStatus.length > 0 &&
           allStatus.map((status) => (
@@ -84,7 +84,7 @@ const SideNav = () => {
         to="/group-create"
         className="absolute bottom-4 right-4 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-zinc-600 text-white"
       >
-        <i className="ri-add-line text-2xl"></i>
+        <i className="ri-add-line text-[1.5rem] md:text-[2rem]"></i>
       </Link>
     </div>
   );

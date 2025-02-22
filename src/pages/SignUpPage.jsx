@@ -94,18 +94,18 @@ const MultiStepSignUpPage = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="w-full h-screen flex items-center justify-center bg-zinc-100 px-4 py-4"
+      className="w-full h-screen flex items-center justify-center bg-zinc-100 px-4 sm:px-8 py-4"
     >
-      <div className="w-full md:w-[30%] py-5 bg-white rounded-xl">
+      <div className="w-full md:w-[50vw] lg:w-[30vw] py-5 bg-white rounded-xl">
         <div className="flex flex-col items-center">
-          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
+          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-zinc-400 overflow-hidden">
             <img className="w-full h-full object-cover" src={logo} alt="" />
           </div>
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-center text-[1.75rem] md:text-[2rem] font-bold leading-none">
             Welcome to <span className="text-blue-600">Chat</span>
             <span className="text-orange-600">X</span>
           </h1>
-          <p className="text-center text-sm mt-1 md:text-base font-medium opacity-70 leading-none md:leading-5">
+          <p className="px-4 text-center text-[1rem] leading-tight font-medium opacity-80">
             Register to create your first account and start exploring the chat
             in ChatX.
           </p>
@@ -114,21 +114,21 @@ const MultiStepSignUpPage = () => {
           <h1
             className={`${
               currentStep === 1 ? "" : "opacity-50"
-            } inline-block text-base font-medium px-6 md:px-10 py-1 rounded-full text-white bg-blue-500`}
+            } inline-block text-base font-medium px-6 md:px-8 py-1 rounded-full text-white bg-blue-500`}
           >
             Step-1
           </h1>
           <h1
             className={`${
               currentStep === 2 ? "" : "opacity-50"
-            } inline-block text-base font-medium px-6 md:px-10 py-1 rounded-full text-white bg-blue-500`}
+            } inline-block text-base font-medium px-6 md:px-8 py-1 rounded-full text-white bg-blue-500`}
           >
             Step-2
           </h1>
           <h1
             className={`${
               currentStep === 3 ? "" : "opacity-50"
-            } inline-block text-base font-medium px-6 md:px-10 py-1 rounded-full text-white bg-blue-500`}
+            } inline-block text-base font-medium px-6 md:px-8 py-1 rounded-full text-white bg-blue-500`}
           >
             Step-3
           </h1>
@@ -161,7 +161,7 @@ const MultiStepSignUpPage = () => {
             />
           )}
         </div>
-        <p className="text-center mt-3 text-sm">
+        <p className="text-center mt-3 text-[1rem]">
           Already have an account ?{" "}
           <Link to="/signin" className="text-blue-600 font-medium">
             Sign In

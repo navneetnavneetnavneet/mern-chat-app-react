@@ -4,10 +4,10 @@ const Step1 = ({ currentStep, nextStep, changeHandler, formData }) => {
   return (
     <>
       <div className="">
-        <span className="text-sm md:text-xs font-medium opacity-50">
+        <span className="text-[1rem] font-medium opacity-50">
           Step {currentStep}/3
         </span>
-        <h1 className="text-2xl text-center font-bold opacity-70">
+        <h1 className="text-[1.25rem] md:text-[1.5rem] text-center font-bold opacity-80">
           Personal Information
         </h1>
       </div>
@@ -39,7 +39,7 @@ const Step1 = ({ currentStep, nextStep, changeHandler, formData }) => {
               type="radio"
               checked={formData.gender === "male" ? true : false}
             />
-            <span className="text-sm font-medium">Male</span>
+            <span className="text-[1rem] font-medium">Male</span>
           </div>
           <div className="flex items-center gap-1">
             <input
@@ -49,7 +49,7 @@ const Step1 = ({ currentStep, nextStep, changeHandler, formData }) => {
               type="radio"
               checked={formData.gender === "female" ? true : false}
             />
-            <span className="text-sm font-medium">Female</span>
+            <span className="text-[1rem] font-medium">Female</span>
           </div>
           <div className="flex items-center gap-1">
             <input
@@ -59,7 +59,7 @@ const Step1 = ({ currentStep, nextStep, changeHandler, formData }) => {
               type="radio"
               checked={formData.gender === "other" ? true : false}
             />
-            <span className="text-sm font-medium">Other</span>
+            <span className="text-[1rem] font-medium">Other</span>
           </div>
         </div>
         <button

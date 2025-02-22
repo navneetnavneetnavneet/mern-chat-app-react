@@ -55,7 +55,7 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="w-full h-[10vh] px-4">
+    <div className="w-full absolute bottom-0 px-4 py-2">
       <form
         onSubmit={submitHandler}
         className="w-full h-full flex items-center gap-2"
@@ -66,7 +66,7 @@ const MessageInput = () => {
             value={messageInput}
             type="text"
             placeholder="message . . ."
-            className="w-full py-3 rounded-full bg-transparent outline-none border-none text-xl font-medium"
+            className="w-full py-3 bg-transparent  outline-none border-none text-xl font-medium"
           />
           <input
             onChange={(e) => setMedia(e.target.files[0])}

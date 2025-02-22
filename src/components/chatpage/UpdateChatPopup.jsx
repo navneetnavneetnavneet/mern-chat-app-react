@@ -89,17 +89,17 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
   return (
     selectedChat && (
       <div
-        className={`w-full h-screen px-4 py-4 absolute text-black top-0 left-0 bg-[#0000007a] ${
+        className={`w-full h-screen px-4 sm:px-8 py-4 absolute z-[999] text-black top-0 left-0 bg-[#0000007a] ${
           hidden ? "hidden" : "flex"
         } items-center justify-center`}
       >
-        <div className="w-full md:w-[35%] md:mx-auto bg-zinc-100 rounded-md">
-          <div className="w-full text-xl md:text-base font-medium flex flex-col gap-3 px-4 py-4">
+        <div className="w-full md:w-[50vw] lg:w-[30vw] mx-auto bg-zinc-100 rounded-md">
+          <div className="w-full mb-2 font-medium flex flex-col gap-3 px-4 py-4">
             <i
               onClick={() => setHidden(!hidden)}
-              className="ri-close-line text-2xl cursor-pointer w-full text-end"
+              className="ri-close-line text-[1.25rem] md:text-[1.5rem] cursor-pointer w-full text-end"
             ></i>
-            <h1 className="mb-5 md:mb-2 px-2 py-2 rounded-md bg-orange-400 text-white text-2xl font-semibold w-full text-center">
+            <h1 className="mb-5 md:mb-2 px-2 py-2 rounded-md bg-orange-400 text-white text-[1.25rem] md:text-[1.5rem] font-bold w-full text-center">
               {selectedChat.chatName}
             </h1>
             <div className="status w-full flex gap-5 overflow-x-auto overflow-y-hidden">
@@ -107,9 +107,13 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 selectedChat.users.map((u) => (
                   <div
                     key={u._id}
-                    className="w-20 h-24 flex-shrink-0 flex flex-col items-center justify-center gap-2 rounded-md bg-blue-200"
+                    className={`${
+                      u._id === selectedChat.groupAdmin._id
+                        ? "bg-green-200"
+                        : "bg-blue-200"
+                    } w-20 py-4 flex-shrink-0 flex flex-col items-center justify-center gap-2 rounded-md`}
                   >
-                    <div className="relative w-12 h-12 md:w-14 md:h-14 border-2 border-zinc-400 rounded-full p-[2px]">
+                    <div className="relative w-14 h-14 md:w-16 md:h-16 border-2 border-zinc-400 rounded-full p-[2px]">
                       <div className="w-full h-full rounded-full overflow-hidden">
                         <img
                           className="w-full h-full object-cover"
@@ -119,12 +123,12 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                       </div>
                       <div
                         onClick={() => handleRemoveUser(u)}
-                        className="absolute -top-2 -right-2 w-6 h-6 cursor-pointer text-white rounded-full flex items-center justify-center bg-orange-500"
+                        className="absolute top-0 -right-2 w-[1.5rem] h-[1.5rem] cursor-pointer text-white rounded-full flex items-center justify-center bg-orange-500"
                       >
-                        <i className="ri-close-line cursor-pointer"></i>
+                        <i className="ri-close-line cursor-pointer text-[1.2rem]"></i>
                       </div>
                     </div>
-                    <p className="text-lg md:text-base leading-none md:leading-3">
+                    <p className="text-[1rem] md:text-base leading-none md:leading-3">
                       {u.fullName?.split(" ")[0]}
                     </p>
                   </div>
@@ -133,7 +137,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 <></>
               )}
             </div>
-            <form onSubmit={submitHandler} className="w-full flex gap-1">
+            <form onSubmit={submitHandler} className="w-full flex gap-2">
               <input
                 onChange={(e) => setChatName(e.target.value)}
                 value={chatName}
@@ -145,7 +149,8 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                 Update
               </button>
             </form>
-            <div className="w-full px-2 rounded-md border border-zinc-400 bg-white flex items-center">
+            <div className="w-full px-2 rounded-md border border-zinc-400 bg-white flex items-center gap-2">
+              <i className="ri-search-line text-[1.2rem]"></i>
               <input
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
@@ -156,7 +161,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
               {search ? (
                 <i
                   onClick={() => setSearch("")}
-                  className="ri-close-line cursor-pointer"
+                  className="ri-close-line cursor-pointer text-[1.2rem]"
                 ></i>
               ) : (
                 ""
@@ -169,9 +174,9 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                   <div
                     onClick={() => handleAddUser(user)}
                     key={user._id}
-                    className="user w-full h-[10vh] px-4 py-4 flex items-center gap-2 border-b border-zinc-400"
+                    className="user w-full px-4 py-2 flex items-center gap-2 border-b border-zinc-400"
                   >
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden">
                       <img
                         className="w-full h-full object-cover"
                         src={user.profileImage?.url}
@@ -179,7 +184,7 @@ const UpdateChatPopup = ({ selectedChat, hidden, setHidden, user }) => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <h1 className="text-xl font-medium leading-none">
+                      <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
                         {user.fullName}
                       </h1>
                     </div>

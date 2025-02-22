@@ -19,7 +19,7 @@ const Message = ({ message }) => {
           message.senderId?._id === user?._id
             ? "ml-auto"
             : "mr-auto flex-row-reverse"
-        } w-fit gap-1 flex items-start justify-between mb-4`}
+        } w-fit gap-2 flex items-start justify-between mb-4`}
       >
         <div
           className={`flex flex-col ${
@@ -51,27 +51,27 @@ const Message = ({ message }) => {
                   to={message.media?.url}
                   className="w-full bg-zinc-700 flex items-center gap-2 px-2 py-2"
                 >
-                  <i className="ri-file-text-line text-2xl font-normal text-white"></i>
-                  <span className="text-blue-600 text-lg">
-                    {message.media?.url.slice(0, 33)}
+                  <i className="ri-file-text-line text-[1.2rem] font-normal text-white"></i>
+                  <span className="text-blue-600 text-[1rem] md:text-[1.25rem]">
+                    {message.media?.url.slice(0, 30)}...
                   </span>
                 </Link>
               )}
             </div>
           )}
           {message.content?.trim() !== "" && (
-            <p className="w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md bg-blue-600 text-white text-lg md:text-base font-medium leading-tight">
+            <p className="w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md bg-blue-600 text-white text-[1rem] md:text-[1.25rem] leading-tight">
               {message.content?.trim()}
             </p>
           )}
-          <span className="text-base md:text-xs font-medium text-white">
+          <span className="text-[.8rem] md:text-[1rem] font-medium text-white">
             {new Date(message.createdAt).toLocaleTimeString("en-In", {
               hour: "numeric",
               minute: "2-digit",
             })}
           </span>
         </div>
-        <div className="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 rounded-full  overflow-hidden">
+        <div className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden">
           <img
             className="w-full h-full object-cover"
             src={message.senderId?.profileImage.url}

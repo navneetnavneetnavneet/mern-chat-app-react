@@ -12,10 +12,12 @@ const Step2 = ({
   return (
     <>
       <div className="">
-        <span className="text-sm md:text-xs font-medium opacity-50">
+        <span className="text-[1rem] font-medium opacity-50">
           Step {currentStep}/3
         </span>
-        <h1 className="text-2xl text-center font-bold opacity-70">Contact Information</h1>
+        <h1 className="text-[1.25rem] md:text-[1.5rem] text-center font-bold opacity-80">
+          Contact Information
+        </h1>
       </div>
       <div className="flex flex-col gap-5 mt-5">
         <input

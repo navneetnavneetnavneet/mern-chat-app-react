@@ -28,25 +28,27 @@ const UploadStatusPage = () => {
   return (
     user && (
       <div className="w-full h-screen bg-zinc-100">
-        <div className="w-full h-[10vh] border-b border-zinc-400 px-4 py-4 flex items-center justify-between">
+        <div className="w-full px-4 md:px-8 py-2 border-b border-zinc-400 flex items-center justify-between">
           <i
-            onClick={() => navigate("/")}
-            className="ri-arrow-left-line text-2xl cursor-pointer"
+            onClick={() => navigate(-1)}
+            className="ri-arrow-left-line text-[1.2rem] cursor-pointer"
           ></i>
-          <h1 className="text-2xl md:text-3xl font-semibold">Upload Status</h1>
+          <h1 className="text-[1.5rem] md:text-[1.75rem] font-semibold">
+            Upload Status
+          </h1>
           <i className="ri-settings-3-line text-2xl cursor-pointer"></i>
         </div>
         <div className="flex flex-col items-center px-4 py-4 mt-5 gap-5">
           <div
             onClick={() => imageRef.current?.click()}
-            className="w-32 h-32 rounded-full flex items-center justify-center border border-zinc-400"
+            className="w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] rounded-full flex items-center justify-center border border-zinc-400"
           >
-            <i className="ri-image-line text-7xl"></i>
+            <i className="ri-image-line text-[4rem]"></i>
           </div>
         </div>
         <form
           onSubmit={submitHandler}
-          className="w-full md:w-[35%] mx-auto px-4 py-4 flex items-center justify-center flex-col"
+          className="w-full md:w-[50vw] lg:w-[30vw] mx-auto px-4 py-4 flex items-center justify-center flex-col"
         >
           <input
             type="file"

@@ -23,16 +23,16 @@ const TopNav = () => {
 
   return (
     selectedChat && (
-      <div className="w-full h-[10vh] px-4 py-2 text-white flex items-center justify-between border-b border-zinc-400">
+      <div className="w-full px-4 py-2 text-white flex items-center justify-between border-b border-zinc-400">
         <div
           onClick={() => setChatInfo(!chatInfo)}
-          className="w-full flex items-center gap-2 cursor-pointer"
+          className="w-full flex items-center gap-3 cursor-pointer"
         >
           <i
-            onClick={() => navigate("/")}
-            className="ri-arrow-left-line text-2xl cursor-pointer"
+            onClick={() => navigate(-1)}
+            className="ri-arrow-left-line text-[1.4rem] cursor-pointer"
           ></i>
-          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden">
+          <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 rounded-full overflow-hidden">
             <img
               className="w-full h-full object-cover"
               src={
@@ -44,7 +44,7 @@ const TopNav = () => {
             />
           </div>
           <div className="flex flex-col">
-            <h1 className="text-xl font-medium leading-none">
+            <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
               {selectedChat?.isGroupChat
                 ? selectedChat?.chatName.slice(0, 10)
                 : oppositeUser?.fullName.slice(0, 14)}
@@ -52,15 +52,15 @@ const TopNav = () => {
             {!selectedChat.isGroupChat && (
               <small
                 className={`${
-                  isOppositeUserOnline ? "text-green-800" : "text-zinc-400"
-                } text-sm md:text-xs font-medium leading-none`}
+                  isOppositeUserOnline ? "text-green-800" : "opacity-50"
+                } text-[1rem] font-medium leading-none`}
               >
                 {isOppositeUserOnline ? "online" : "offline"}
               </small>
             )}
           </div>
         </div>
-        <div className="flex items-center gap-5 text-2xl">
+        <div className="flex items-center gap-5 md:gap-10 text-[1.25rem] md:text-[1.5rem]">
           {selectedChat.isGroupChat && (
             <i
               onClick={() => setHidden(!hidden)}

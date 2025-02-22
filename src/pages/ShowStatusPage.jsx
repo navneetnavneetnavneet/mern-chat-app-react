@@ -62,10 +62,14 @@ const ShowStatusPage = () => {
           style={{
             background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))`,
           }}
-          className="absolute top-0 left-0 z-[999] w-full h-[10vh] px-4 py-4 flex items-center justify-between text-white border-b border-zinc-400"
+          className="absolute top-0 left-0 z-[999] w-full px-4 py-2 flex items-center justify-between text-white border-b border-zinc-400"
         >
           <div className="flex items-center gap-2">
-            <div className="relative w-12 h-12 md:w-14 md:h-14">
+            <i
+              onClick={() => navigate("/")}
+              className="ri-arrow-left-line text-[1.4rem] cursor-pointer"
+            ></i>
+            <div className="relative w-14 h-14 md:w-16 md:h-16">
               <img
                 className="w-full h-full object-cover rounded-full overflow-hidden"
                 src={statusUser.profileImage.url}
@@ -74,15 +78,15 @@ const ShowStatusPage = () => {
               {statusUser?._id === user?._id ? (
                 <Link
                   to="/status/upload"
-                  className="w-6 h-6 absolute z-[100] bottom-0 right-0 translate-x-1/4 translate-y-1/4 flex items-center justify-center rounded-full bg-zinc-200  border-2 border-zinc-600 "
+                  className="w-[1.6rem] h-[1.6rem] absolute z-[100] bottom-1 right-0 translate-x-1/4 translate-y-1/4 flex items-center justify-center rounded-full bg-zinc-200  border-2 border-zinc-600 "
                 >
-                  <i className="ri-add-line text-[1.4rem] font-semibold md:font-normal"></i>
+                  <i className="ri-add-line text-[1.2rem] text-black"></i>
                 </Link>
               ) : (
                 ""
               )}
             </div>
-            <h1 className="text-xl font-medium leading-none">
+            <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
               {statusUser.fullName}
             </h1>
           </div>
@@ -93,7 +97,7 @@ const ShowStatusPage = () => {
                   asyncDeleteStatus(statusUser?.status[currentIndex]?._id)
                 )
               }
-              className="ri-delete-bin-line z-[2000] text-xl"
+              className="ri-delete-bin-line z-[2000] text-[1.2rem]"
             ></i>
           )}
           <div className="absolute bottom-0 left-0 w-full h-[3px] z-10 bg-zinc-400 overflow-hidden">
@@ -128,12 +132,12 @@ const ShowStatusPage = () => {
           onClick={nextStatusHandler}
           className="absolute top-0 right-0 z-[200] w-1/2 h-full"
         ></div>
-        <div className="absolute bottom-0 w-full h-[10vh] flex items-center px-4 text-white font-medium">
+        <div className="absolute bottom-0 w-full flex items-center px-4 py-2 text-white font-medium">
           <form className="w-full flex items-center gap-2">
             <input
               type="text"
               placeholder="message . . ."
-              className="w-full px-4 py-2 rounded-full bg-transparent outline-none border-2 border-zinc-400 text-xl"
+              className="w-full px-4 py-2 rounded-full bg-transparent outline-none border-2 border-white text-white"
             />
             <button className="px-4 py-3 rounded-full bg-zinc-50 text-zinc-600">
               <i className="ri-send-plane-2-fill"></i>
