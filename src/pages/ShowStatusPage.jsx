@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncDeleteStatus } from "../store/actions/statusActions";
+import LoadingPage from "./LoadingPage";
 
 const ShowStatusPage = () => {
   const navigate = useNavigate();
@@ -54,98 +55,97 @@ const ShowStatusPage = () => {
     }
   };
 
-  return (
-    statusUser &&
-    user && (
-      <div className="relative w-full h-screen bg-zinc-100 overflow-hidden">
-        <div
-          style={{
-            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))`,
-          }}
-          className="absolute top-0 left-0 z-[999] w-full px-4 py-2 flex items-center justify-between text-white border-b border-zinc-400"
-        >
-          <div className="flex items-center gap-2">
-            <i
-              onClick={() => navigate("/")}
-              className="ri-arrow-left-line text-[1.4rem] cursor-pointer"
-            ></i>
-            <div className="relative w-14 h-14 md:w-16 md:h-16">
-              <img
-                className="w-full h-full object-cover rounded-full overflow-hidden"
-                src={statusUser.profileImage.url}
-                alt=""
-              />
-              {statusUser?._id === user?._id ? (
-                <Link
-                  to="/status/upload"
-                  className="w-[1.6rem] h-[1.6rem] absolute z-[100] bottom-1 right-0 translate-x-1/4 translate-y-1/4 flex items-center justify-center rounded-full bg-zinc-200  border-2 border-zinc-600 "
-                >
-                  <i className="ri-add-line text-[1.2rem] text-black"></i>
-                </Link>
-              ) : (
-                ""
-              )}
-            </div>
-            <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
-              {statusUser.fullName}
-            </h1>
-          </div>
-          {statusUser._id === user?._id && (
-            <i
-              onClick={async () =>
-                await dispatch(
-                  asyncDeleteStatus(statusUser?.status[currentIndex]?._id)
-                )
-              }
-              className="ri-delete-bin-line z-[2000] text-[1.2rem]"
-            ></i>
-          )}
-          <div className="absolute bottom-0 left-0 w-full h-[3px] z-10 bg-zinc-400 overflow-hidden">
-            <div
-              style={{ width: `${progress}%` }}
-              className="h-full rounded-full bg-white"
-            ></div>
-          </div>
-        </div>
-        <div className="w-full h-full overflow-hidden">
-          {statusUser?.status[currentIndex]?.media.fileType === "image" ? (
+  return statusUser && user ? (
+    <div className="relative w-full h-screen bg-zinc-100 overflow-hidden">
+      <div
+        style={{
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))`,
+        }}
+        className="absolute top-0 left-0 z-[999] w-full px-4 py-2 flex items-center justify-between text-white border-b border-zinc-400"
+      >
+        <div className="flex items-center gap-2">
+          <i
+            onClick={() => navigate("/")}
+            className="ri-arrow-left-line text-[1.4rem] cursor-pointer"
+          ></i>
+          <div className="relative w-14 h-14 md:w-16 md:h-16">
             <img
-              className="w-full h-full object-cover"
-              src={statusUser?.status[currentIndex]?.media.url}
+              className="w-full h-full object-cover rounded-full overflow-hidden"
+              src={statusUser.profileImage.url}
               alt=""
             />
-          ) : (
-            <video
-              className="w-full h-full object-cover"
-              autoPlay={true}
-              loop={false}
-              muted={true}
-              src={statusUser?.status[currentIndex]?.media.url}
-            ></video>
-          )}
+            {statusUser?._id === user?._id ? (
+              <Link
+                to="/status/upload"
+                className="w-[1.6rem] h-[1.6rem] absolute z-[100] bottom-1 right-0 translate-x-1/4 translate-y-1/4 flex items-center justify-center rounded-full bg-zinc-200  border-2 border-zinc-600 "
+              >
+                <i className="ri-add-line text-[1.2rem] text-black"></i>
+              </Link>
+            ) : (
+              ""
+            )}
+          </div>
+          <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
+            {statusUser.fullName}
+          </h1>
         </div>
-        <div
-          onClick={previousStatusHandler}
-          className="absolute top-0 left-0 z-[200] w-1/2 h-full"
-        ></div>
-        <div
-          onClick={nextStatusHandler}
-          className="absolute top-0 right-0 z-[200] w-1/2 h-full"
-        ></div>
-        <div className="absolute bottom-0 w-full flex items-center px-4 py-2 text-white font-medium">
-          <form className="w-full flex items-center gap-2">
-            <input
-              type="text"
-              placeholder="message . . ."
-              className="w-full px-4 py-2 rounded-full bg-transparent outline-none border-2 border-white text-white"
-            />
-            <button className="px-4 py-3 rounded-full bg-zinc-50 text-zinc-600">
-              <i className="ri-send-plane-2-fill"></i>
-            </button>
-          </form>
+        {statusUser._id === user?._id && (
+          <i
+            onClick={async () =>
+              await dispatch(
+                asyncDeleteStatus(statusUser?.status[currentIndex]?._id)
+              )
+            }
+            className="ri-delete-bin-line z-[2000] text-[1.2rem]"
+          ></i>
+        )}
+        <div className="absolute bottom-0 left-0 w-full h-[3px] z-10 bg-zinc-400 overflow-hidden">
+          <div
+            style={{ width: `${progress}%` }}
+            className="h-full rounded-full bg-white"
+          ></div>
         </div>
       </div>
-    )
+      <div className="w-full h-full overflow-hidden">
+        {statusUser?.status[currentIndex]?.media.fileType === "image" ? (
+          <img
+            className="w-full h-full object-cover"
+            src={statusUser?.status[currentIndex]?.media.url}
+            alt=""
+          />
+        ) : (
+          <video
+            className="w-full h-full object-cover"
+            autoPlay={true}
+            loop={false}
+            muted={true}
+            src={statusUser?.status[currentIndex]?.media.url}
+          ></video>
+        )}
+      </div>
+      <div
+        onClick={previousStatusHandler}
+        className="absolute top-0 left-0 z-[200] w-1/2 h-full"
+      ></div>
+      <div
+        onClick={nextStatusHandler}
+        className="absolute top-0 right-0 z-[200] w-1/2 h-full"
+      ></div>
+      <div className="absolute bottom-0 w-full flex items-center px-4 py-2 text-white font-medium">
+        <form className="w-full flex items-center gap-2">
+          <input
+            type="text"
+            placeholder="message . . ."
+            className="w-full px-4 py-2 rounded-full bg-transparent outline-none border-2 border-white text-white"
+          />
+          <button className="px-4 py-3 rounded-full bg-zinc-50 text-zinc-600">
+            <i className="ri-send-plane-2-fill"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  ) : (
+    <LoadingPage />
   );
 };
 

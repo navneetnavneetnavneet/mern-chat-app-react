@@ -60,7 +60,13 @@ const Message = ({ message }) => {
             </div>
           )}
           {message.content?.trim() !== "" && (
-            <p className="w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md bg-blue-600 text-white text-[1rem] md:text-[1.25rem] leading-tight">
+            <p
+              className={`${
+                message.senderId?._id === user?._id
+                  ? "bg-blue-500"
+                  : "bg-green-500"
+              } w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md text-white text-[1rem] md:text-[1.25rem] leading-tight`}
+            >
               {message.content?.trim()}
             </p>
           )}

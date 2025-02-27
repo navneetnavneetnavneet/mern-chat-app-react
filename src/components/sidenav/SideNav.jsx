@@ -39,10 +39,10 @@ const SideNav = () => {
     return () => setUsers([]);
   }, [search]);
 
-  // console.log(users);
+  console.log(users);
 
   return (
-    <div className="relative w-full sm:w-[50vw] md:w-[40vw] lg:w-[30vw] h-full bg-zinc-100">
+    <div className="relative border-r border-zinc-400 w-full sm:w-[50vw] md:w-[40vw] lg:w-[30vw] h-full bg-zinc-100">
       <TopNav />
       <div className="relative w-full px-4 my-2">
         <div className="w-full flex items-center rounded-md border border-zinc-400 px-2 text-xl font-medium">
@@ -61,7 +61,11 @@ const SideNav = () => {
             <></>
           )}
         </div>
-        <div className="absolute left-0 top-[120%] z-[1000] w-full max-h-[70vh] rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto">
+        <div
+          className={`${
+            users.length > 0 ? "h-[70vh]" : ""
+          } absolute left-0 top-[120%] z-[1000] w-full rounded-md bg-zinc-100 overflow-x-hidden overflow-y-auto`}
+        >
           {!loading ? (
             users.length > 0 &&
             users.map((user) => <User key={user._id} user={user} />)

@@ -8,10 +8,11 @@ import { setSelectedChat } from "../store/reducers/chatSlice";
 import { asyncFetchAllMessages } from "../store/actions/messageActions";
 import { setMessages } from "../store/reducers/messageSlice";
 import { socketContext } from "../context/SocketContext";
+import LoadingPage from "./LoadingPage";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
-  const { chats } = useSelector((state) => state.chatReducer);
+  const { chats, slectedChat } = useSelector((state) => state.chatReducer);
   const { messages } = useSelector((state) => state.messageReducer);
 
   const { socket } = useContext(socketContext);
@@ -39,12 +40,14 @@ const ChatPage = () => {
     });
   }, [messages, dispatch]);
 
-  return (
+  return chatId ? (
     <div className="relative w-full h-screen bg-zinc-800">
       <TopNav />
       <MessageContainer />
       <MessageInput />
     </div>
+  ) : (
+    <LoadingPage />
   );
 };
 

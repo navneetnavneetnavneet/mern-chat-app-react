@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "../utils/axios";
 import { toast } from "react-toastify";
 import { asyncCreateGroup } from "../store/actions/chatActions";
+import LoadingPage from "./LoadingPage";
 
 const CreateGroupPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ const CreateGroupPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [slectedUsers, setSelectedUsers] = useState([]);
+
+  const { user } = useSelector((state) => state.userReducer);
 
   const fetchSearchResults = async () => {
     if (!search) {
@@ -74,7 +77,7 @@ const CreateGroupPage = () => {
     setChatName("");
   };
 
-  return (
+  return user ? (
     <div className="w-full h-screen bg-zinc-100">
       <div className="w-full px-4 md:px-8 py-2 border-b border-zinc-400 flex items-center justify-between">
         <i
@@ -191,6 +194,8 @@ const CreateGroupPage = () => {
         </form>
       </div>
     </div>
+  ) : (
+    <LoadingPage />
   );
 };
 
