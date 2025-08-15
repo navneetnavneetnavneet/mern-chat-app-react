@@ -32,33 +32,30 @@ const SignInPage = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="w-full h-screen flex items-center justify-center bg-zinc-100 px-4 sm:px-8 py-4"
+      className="w-full h-screen flex items-center justify-center bg-zinc-100 px-2 md:px-4 py-4"
     >
-      <div className="w-full md:w-[50vw] lg:w-[30vw] py-5 bg-white rounded-xl">
+      <div className="w-full md:w-[40vw] lg:w-[30vw] py-5 bg-white rounded-xl">
         <div className="flex flex-col items-center">
           <div className="w-14 h-14 md:w-16 md:h-16 border border-zinc-400 rounded-full overflow-hidden">
             <img className="w-full h-full object-cover" src={logo} alt="" />
           </div>
-          <h1 className="text-center text-[1.75rem] md:text-[2rem] leading-none font-bold">
+          <h1 className="text-center text-[1.5rem] md:text-[1.75rem] tracking-tighter font-bold">
             Welcome to <span className="text-blue-600">Chat</span>
             <span className="text-orange-600">X</span>
           </h1>
-          <p className="text-center text-[1rem] md:text-base font-medium opacity-80">
+          <p className="text-center text-base tracking-tighter leading-none font-medium opacity-80">
             Please enter your details to sign in.
           </p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-y-3 mt-5 px-4 py-2 font-medium"
+          className="w-full flex flex-col gap-y-5 pt-5 px-2 md:px-4 py-2 tracking-tighter font-medium"
         >
           <div>
-            <label htmlFor="email" className="text-xl md:text-lg opacity-80">
-              Email
-            </label>
             <input
               type="email"
               placeholder="Enter email"
-              className="w-full px-4 py-2 rounded-md outline-none border border-zinc-400 bg-zinc-100 text-base font-medium"
+              className="w-full px-2 py-2 rounded-md outline-none border border-zinc-400 text-base"
               {...register("email", { required: true })}
             />
             {errors.email && errors.email.type === "required" ? (
@@ -70,14 +67,11 @@ const SignInPage = () => {
             )}
           </div>
           <div>
-            <label htmlFor="password" className="text-xl md:text-lg opacity-80">
-              Password
-            </label>
             <div className="w-full flex items-center justify-between rounded-md bg-zinc-100 border border-zinc-400">
               <input
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
-                className="w-full px-4 py-2 rounded-md outline-none bg-zinc-100 text-base font-medium"
+                className="w-full px-2 py-2 rounded-md border-none outline-none text-base"
                 {...register("password", {
                   required: true,
                   minLength: 6,
@@ -119,16 +113,16 @@ const SignInPage = () => {
             )}
             <Link
               to="/forgot-password"
-              className="w-full inline-block text-end mt-1 text-[1rem] text-blue-600 font-medium"
+              className="w-full inline-block text-end text-base md:text-sm font-medium tracking-tighter text-blue-600"
             >
               Forger Password ?
             </Link>
           </div>
-          <button className="w-full px-4 py-2 rounded-md text-base text-white bg-blue-500 hover:bg-blue-600">
+          <button className="w-full px-2 py-2 rounded-md text-base tracking-tight text-white bg-blue-500 hover:bg-blue-600">
             Sign In
           </button>
         </form>
-        <p className="text-center mt-3 text-[1rem">
+        <p className="text-center text-base md:text-sm font-medium text-zinc-700 tracking-tighter">
           Don't have an account ?{" "}
           <Link to="/signup" className="text-blue-600 font-medium">
             Sign Up

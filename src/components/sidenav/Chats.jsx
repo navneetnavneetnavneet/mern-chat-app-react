@@ -9,7 +9,7 @@ const Chats = () => {
   const isUserOnline = (userId) => onlineUsers.includes(userId);
 
   return (
-    <div className="scroll w-full max-h-[70vh] overflow-x-hidden overflow-y-auto">
+    <div className="w-full max-h-[70vh] overflow-x-hidden overflow-y-auto">
       {chats.length > 0 ? (
         chats.map((chat) => {
           const chatUser = !chat.isGroupChat
@@ -24,7 +24,7 @@ const Chats = () => {
             <Link
               key={chat._id}
               to={`/chat/${chat._id}`}
-              className="w-full px-4 py-2 flex items-center gap-3 border-b border-zinc-400"
+              className="w-full h-[10vh] px-2 md:px-4 hover:bg-zinc-200 duration-300 flex items-center gap-2 md:gap-3 border-b border-zinc-400"
             >
               <div className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden">
                 <img
@@ -38,14 +38,14 @@ const Chats = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
+                <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium tracking-tighter leading-tight">
                   {!chat.isGroupChat ? chatUser?.fullName : chat.chatName}
                 </h1>
                 {!chat.isGroupChat && (
                   <small
                     className={`${
-                      isOnline ? "text-green-800" : "opacity-50"
-                    } text-[1rem] font-medium leading-none`}
+                      isOnline ? "text-green-600" : "text-gray-600"
+                    } text-sm font-medium tracking-tighter leading-none`}
                   >
                     {isOnline ? "online" : "offline"}
                   </small>
@@ -55,7 +55,7 @@ const Chats = () => {
           );
         })
       ) : (
-        <h1 className="text-[1rem] pt-5 font-medium w-full text-center opacity-50">
+        <h1 className="text-base pt-5 font-medium tracking-tighter w-full text-center opacity-50">
           Chats are not present.
         </h1>
       )}

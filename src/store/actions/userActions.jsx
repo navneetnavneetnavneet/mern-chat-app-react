@@ -103,7 +103,7 @@ export const asyncResetPassword =
   };
 
 export const asyncEditProfile =
-  ({ fullName, email, gender, profileImage }) =>
+  ({ fullName, email, gender, dateOfBirth, profileImage }) =>
   async (dispatch, getState) => {
     try {
       const { data, status } = await axios.post(
@@ -112,6 +112,7 @@ export const asyncEditProfile =
           fullName,
           email,
           gender,
+          dateOfBirth,
           profileImage,
         },
         {

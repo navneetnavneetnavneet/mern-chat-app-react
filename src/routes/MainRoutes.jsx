@@ -18,6 +18,8 @@ import { setAllStatus } from "../store/reducers/statusSlice";
 import { setAllUser } from "../store/reducers/userSlice";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
+import UpdateGroupDetailsPage from "../pages/UpdateGroupDetailsPage";
+import ChatInformationPage from "../pages/ChatInformationPage";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -48,13 +50,25 @@ const MainRoutes = () => {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/edit" element={<EditProfilePage />} />
-        <Route path="/chat/:chatId" element={<ChatPage />} />
-        <Route path="/group-create" element={<CreateGroupPage />} />
+        <Route path="/profile/edit" element={<EditProfilePage />} />
+        <Route path="/chat/:chatId" element={<ChatPage />}>
+          <Route
+            path="/chat/:chatId/update-group-details"
+            element={<UpdateGroupDetailsPage />}
+          />
+          <Route
+            path="/chat/:chatId/chat-information"
+            element={<ChatInformationPage />}
+          />
+        </Route>
+        <Route path="/create-group" element={<CreateGroupPage />} />
         <Route path="/status/:userId" element={<ShowStatusPage />} />
         <Route path="/status/upload" element={<UploadStatusPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password/:resetToken" element={<ResetPasswordPage />} />
+        <Route
+          path="/reset-password/:resetToken"
+          element={<ResetPasswordPage />}
+        />
       </Routes>
     </>
   );

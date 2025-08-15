@@ -21,9 +21,9 @@ const Status = ({ user }) => {
         {loggedInUser && loggedInUser?.user?._id === user?._id ? (
           <Link
             to="/status/upload"
-            className="w-[1.5rem] h-[1.5rem] absolute z-[100] bottom-0 md:bottom-1 right-0 translate-x-1/4 translate-y-1/4 flex items-center justify-center rounded-full bg-zinc-200  border-2 border-zinc-600 "
+            className="w-[1.5rem] h-[1.5rem] absolute z-[999] bottom-0 md:bottom-1 right-0 translate-x-1/4 translate-y-1/4 flex items-center justify-center rounded-full bg-zinc-100  border-2 border-zinc-600 "
           >
-            <i className="ri-add-line text-[1.2rem]"></i>
+            <i className="ri-add-line text-[1.25rem]"></i>
           </Link>
         ) : (
           ""

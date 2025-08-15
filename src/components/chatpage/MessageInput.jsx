@@ -55,18 +55,18 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="w-full absolute bottom-0 px-4 py-2">
+    <div className="w-full h-[10vh] px-2 md:px-4 flex items-center absolute bottom-0">
       <form
         onSubmit={submitHandler}
-        className="w-full h-full flex items-center gap-2"
+        className="w-full h-full flex items-center gap-1 md:gap-2 font-medium tracking-tighter"
       >
         <div className="w-full flex items-center bg-white rounded-full px-4">
           <input
             onChange={(e) => setMessageInput(e.target.value)}
             value={messageInput}
             type="text"
-            placeholder="message . . ."
-            className="w-full py-3 bg-transparent  outline-none border-none text-xl font-medium"
+            placeholder="Message . . ."
+            className="w-full py-3 bg-transparent outline-none border-none text-base"
           />
           <input
             onChange={(e) => setMedia(e.target.files[0])}
@@ -76,10 +76,10 @@ const MessageInput = () => {
           />
           <i
             onClick={fileHandler}
-            className="ri-attachment-line cursor-pointer text-xl font-medium"
+            className="ri-attachment-line text-[1.25rem] cursor-pointer"
           ></i>
         </div>
-        <button className="px-4 py-3 rounded-full bg-zinc-50">
+        <button className="px-4 py-3 rounded-full bg-zinc-50 cursor-pointer">
           <i className="ri-send-plane-2-fill"></i>
         </button>
       </form>

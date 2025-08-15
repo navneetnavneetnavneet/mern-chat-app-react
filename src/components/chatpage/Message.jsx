@@ -27,7 +27,7 @@ const Message = ({ message }) => {
           }`}
         >
           {message.media && message.media.url !== "" && (
-            <div className="rounded-md overflow-hidden">
+            <div className="max-w-full md:max-w-96 rounded-md overflow-hidden">
               {message.media.fileType === "image" && (
                 <img
                   className="w-80 h-60 object-cover"
@@ -52,8 +52,8 @@ const Message = ({ message }) => {
                   className="w-full bg-zinc-700 flex items-center gap-2 px-2 py-2"
                 >
                   <i className="ri-file-text-line text-[1.2rem] font-normal text-white"></i>
-                  <span className="text-blue-600 text-[1rem] md:text-[1.25rem]">
-                    {message.media?.url.slice(0, 30)}...
+                  <span className="text-blue-600 text-[1rem]">
+                    {message.media?.url.slice(0, 35)}...
                   </span>
                 </Link>
               )}
@@ -65,7 +65,7 @@ const Message = ({ message }) => {
                 message.senderId?._id === user?._id
                   ? "bg-blue-500"
                   : "bg-green-500"
-              } w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-md text-white text-[1rem] md:text-[1.25rem] leading-tight`}
+              } w-fit max-w-full md:max-w-96 px-4 py-2 mt-2 rounded-bl-lg rounded-tr-lg text-white text-base leading-none tracking-tighter`}
             >
               {message.content?.trim()}
             </p>

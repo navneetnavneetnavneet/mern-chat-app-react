@@ -14,7 +14,7 @@ const User = ({ user }) => {
           const { chatId } = await dispatch(asyncAccessChat(user._id));
           await navigate(`/chat/${chatId}`);
         }}
-        className="user w-full px-4 py-2 flex items-center gap-3 cursor-pointer border-b border-zinc-400"
+        className="w-full h-[10vh] px-2 md:px-4 hover:bg-zinc-200 duration-300 flex items-center gap-2 md:gap-3 border-b border-zinc-400 cursor-pointer"
       >
         <div className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden">
           <img
@@ -23,9 +23,9 @@ const User = ({ user }) => {
             alt=""
           />
         </div>
-        <div className="flex flex-col">
-          <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">{user.fullName}</h1>
-        </div>
+        <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium tracking-tighter">
+          {user.fullName}
+        </h1>
       </div>
     )
   );

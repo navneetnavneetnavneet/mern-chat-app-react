@@ -1,9 +1,8 @@
-import React from "react";
 import MainRoutes from "./routes/MainRoutes";
 
 const App = () => {
   return (
-    <div className="w-full h-screen">
+    <div className="relative w-full h-screen">
       <MainRoutes />
     </div>
   );

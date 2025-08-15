@@ -2,20 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.status::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 100px;
-  background-color: rgb(158, 154, 154);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  border-radius: 100px;
-  background-color: gray;
-}

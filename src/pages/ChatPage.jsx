@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import MessageInput from "../components/chatpage/MessageInput";
 import TopNav from "../components/chatpage/TopNav";
 import MessageContainer from "../components/chatpage/MessageContainer";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedChat } from "../store/reducers/chatSlice";
 import { asyncFetchAllMessages } from "../store/actions/messageActions";
@@ -45,6 +45,7 @@ const ChatPage = () => {
       <TopNav />
       <MessageContainer />
       <MessageInput />
+      <Outlet />
     </div>
   ) : (
     <LoadingPage />

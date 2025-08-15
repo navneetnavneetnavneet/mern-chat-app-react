@@ -61,12 +61,12 @@ const ShowStatusPage = () => {
         style={{
           background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4))`,
         }}
-        className="absolute top-0 left-0 z-[999] w-full px-4 py-2 flex items-center justify-between text-white border-b border-zinc-400"
+        className="absolute top-0 left-0 z-[999] w-full h-[10vh] px-2 md:px-4 flex items-center justify-between text-white border-b border-zinc-400"
       >
         <div className="flex items-center gap-2">
           <i
-            onClick={() => navigate("/")}
-            className="ri-arrow-left-line text-[1.4rem] cursor-pointer"
+            onClick={() => navigate(-1)}
+            className="ri-arrow-left-line text-[1.25rem] cursor-pointer"
           ></i>
           <div className="relative w-14 h-14 md:w-16 md:h-16">
             <img
@@ -85,7 +85,7 @@ const ShowStatusPage = () => {
               ""
             )}
           </div>
-          <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
+          <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium tracking-tighter leading-tight">
             {statusUser.fullName}
           </h1>
         </div>
@@ -96,7 +96,7 @@ const ShowStatusPage = () => {
                 asyncDeleteStatus(statusUser?.status[currentIndex]?._id)
               )
             }
-            className="ri-delete-bin-line z-[2000] text-[1.2rem]"
+            className="ri-delete-bin-line z-[2000] text-[1.25rem]"
           ></i>
         )}
         <div className="absolute bottom-0 left-0 w-full h-[3px] z-10 bg-zinc-400 overflow-hidden">
@@ -131,7 +131,7 @@ const ShowStatusPage = () => {
         onClick={nextStatusHandler}
         className="absolute top-0 right-0 z-[200] w-1/2 h-full"
       ></div>
-      <div className="absolute bottom-0 w-full flex items-center px-4 py-2 text-white font-medium">
+      <div className="absolute bottom-0 w-full h-[10vh] px-2 md:px-4 flex items-center text-white font-medium">
         <form className="w-full flex items-center gap-2">
           <input
             type="text"

@@ -36,29 +36,29 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-zinc-100 px-4 py-4">
-      <div className="md:w-[50vw] lg:w-[30vw] mx-auto flex flex-col items-center gap-5">
-        <div className="w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] mt-5 rounded-full border-2 flex items-center justify-center">
+    <div className="w-full h-screen bg-zinc-100 px-2 md:px-4">
+      <div className="md:w-[50vw] lg:w-[30vw] mx-auto flex flex-col items-center pt-10 gap-5">
+        <div className="w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] rounded-full border-2 flex items-center justify-center">
           <i className="text-[3rem] ri-lock-line"></i>
         </div>
-        <h1 className="text-[1.25rem] md:text-[1.5rem] font-bold leading-none">
+        <h1 className="text-center text-[1.75rem] md:text-[2rem] tracking-tighter leading-none font-semibold">
           Create a strong password
         </h1>
-        <p className="text-[1rem] md:text-[1.25rem] text-center opacity-80 leading-tight">
+        <p className="text-center text-base tracking-tighter leading-none font-medium opacity-80">
           A strong password should be unique, long, and difficult to guess. It
           must include uppercase and lowercase letters, numbers, and special
           characters. Always use different passwords for different accounts and
           update them regularly to enhance security.
         </p>
-        <form onSubmit={submitHandler} className="w-full flex flex-col gap-5">
-          <div className="flex items-center w-full px-4 bg-zinc-100 rounded-md border border-zinc-400">
+        <form onSubmit={submitHandler} className="w-full flex flex-col gap-5 font-medium">
+          <div className="flex items-center w-full px-2 rounded-md border border-zinc-400">
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               type={show ? "text" : "password"}
               name="password"
               placeholder="Enter password"
-              className="w-full py-2 text-base font-medium bg-zinc-100 outline-none"
+              className="w-full py-2 text-base font-medium border-none outline-none"
             />
             <span
               onClick={() => setShow(!show)}
@@ -74,9 +74,9 @@ const ResetPasswordPage = () => {
             value={confirmPassword}
             type="password"
             placeholder="Confirm Password"
-            className="w-full px-4 py-2 rounded-md outline-none border border-zinc-400 bg-zinc-100 text-base font-medium"
+            className="w-full px-2 py-2 rounded-md outline-none border border-zinc-400 text-base font-medium"
           />
-          <button className="w-full px-4 py-2 rounded-md text-base text-white bg-blue-500 hover:bg-blue-600">
+          <button className="w-full px-2 py-2 rounded-md text-base text-white bg-blue-500 hover:bg-blue-600">
             Change Password
           </button>
         </form>

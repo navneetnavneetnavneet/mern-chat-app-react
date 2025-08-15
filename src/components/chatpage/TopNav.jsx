@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import UpdateChatPopup from "./UpdateChatPopup";
-import ChatInformation from "./ChatInformation";
 
 const TopNav = () => {
   const navigate = useNavigate();
-
-  const [hidden, setHidden] = useState(true);
-  const [chatInfo, setChatInfo] = useState(false);
 
   const { user, onlineUsers } = useSelector((state) => state.userReducer);
   const { selectedChat } = useSelector((state) => state.chatReducer);
@@ -23,14 +18,11 @@ const TopNav = () => {
 
   return (
     selectedChat && (
-      <div className="w-full px-4 py-2 text-white flex items-center justify-between border-b border-zinc-400">
-        <div
-          onClick={() => setChatInfo(!chatInfo)}
-          className="w-full flex items-center gap-3 cursor-pointer"
-        >
+      <div className="w-full h-[10vh] px-2 md:px-4 text-white flex items-center justify-between border-b border-zinc-400">
+        <div className="w-full flex items-center gap-2 md:gap-3 cursor-pointer">
           <i
             onClick={() => navigate(-1)}
-            className="ri-arrow-left-line text-[1.4rem] cursor-pointer"
+            className="ri-arrow-left-line text-[1.25rem] cursor-pointer"
           ></i>
           <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 rounded-full overflow-hidden">
             <img
@@ -44,7 +36,7 @@ const TopNav = () => {
             />
           </div>
           <div className="flex flex-col">
-            <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium leading-none">
+            <h1 className="text-[1.25rem] md:text-[1.5rem] font-medium tracking-tighter leading-tight">
               {selectedChat?.isGroupChat
                 ? selectedChat?.chatName.slice(0, 10)
                 : oppositeUser?.fullName.slice(0, 14)}
@@ -52,39 +44,32 @@ const TopNav = () => {
             {!selectedChat.isGroupChat && (
               <small
                 className={`${
-                  isOppositeUserOnline ? "text-green-800" : "opacity-50"
-                } text-[1rem] font-medium leading-none`}
+                  isOppositeUserOnline ? "text-green-500" : "text-gray-500"
+                } text-sm font-medium tracking-tighter leading-none`}
               >
                 {isOppositeUserOnline ? "online" : "offline"}
               </small>
             )}
           </div>
         </div>
-        <div className="flex items-center gap-5 md:gap-10 text-[1.25rem] md:text-[1.5rem]">
+        <div className="flex items-center gap-5 md:gap-10">
           {selectedChat.isGroupChat && (
             <i
-              onClick={() => setHidden(!hidden)}
-              className="ri-edit-box-line cursor-pointer"
+              onClick={() =>
+                navigate(`/chat/${selectedChat._id}/update-group-details`)
+              }
+              className="ri-edit-box-line text-[1.25rem] cursor-pointer"
             ></i>
           )}
-          <i className="ri-phone-line cursor-pointer"></i>
-          <i className="ri-live-line cursor-pointer"></i>
+          <i className="ri-phone-line text-[1.25rem] cursor-pointer"></i>
+          <i className="ri-live-line text-[1.25rem] cursor-pointer"></i>
+          <i
+            onClick={() =>
+              navigate(`/chat/${selectedChat._id}/chat-information`)
+            }
+            className="ri-information-line text-[1.25rem] cursor-pointer"
+          ></i>
         </div>
-        {selectedChat.isGroupChat && (
-          <UpdateChatPopup
-            user={user}
-            hidden={hidden}
-            setHidden={setHidden}
-            selectedChat={selectedChat}
-          />
-        )}
-        {chatInfo && (
-          <ChatInformation
-            selectedChat={selectedChat}
-            chatInfo={chatInfo}
-            setChatInfo={setChatInfo}
-          />
-        )}
       </div>
     )
   );
