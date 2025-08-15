@@ -21,7 +21,7 @@ export const SocketContextProvider = ({ children }) => {
     }
 
     // Initialize the socket connection
-    const newSocket = io("http://localhost:8080");
+    const newSocket = io(`${import.meta.env.VITE_API_URL}`);
     setSocket(newSocket);
 
     // Setup the socket for the current user
