@@ -1,45 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import TopNav from "./TopNav";
 import Status from "./Status";
 import { Link } from "react-router-dom";
 import Chats from "./Chats";
 import User from "./User";
-import axios from "../../utils/axios";
 import { useSelector } from "react-redux";
+import useSearchResults from "../../hooks/useSearchResults";
 
 const SideNav = () => {
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+
+  const { users, loading } = useSearchResults(search);
 
   const { user } = useSelector((state) => state.userReducer);
   const { allStatus } = useSelector((state) => state.statusReducer);
-
-  const fetchSearchResults = async () => {
-    if (!search) {
-      return;
-    }
-    setLoading(true);
-
-    try {
-      const { data } = await axios.get(`/users/alluser?search=${search}`);
-      if (data) {
-        setUsers(data);
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.response?.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchSearchResults();
-
-    return () => setUsers([]);
-  }, [search]);
-
-  console.log(users);
 
   return (
     <div className="relative border-r border-zinc-400 w-full sm:w-[50vw] md:w-[40vw] lg:w-[30vw] h-full">

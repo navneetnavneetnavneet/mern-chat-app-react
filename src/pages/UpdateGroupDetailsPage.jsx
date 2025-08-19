@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "../utils/axios";
 import { toast } from "react-toastify";
 import {
   asyncAddUserToGroup,
@@ -9,6 +8,7 @@ import {
   asyncRemoveUserFromGroup,
   asyncRenameGroup,
 } from "../store/actions/chatActions";
+import useSearchResults from "../hooks/useSearchResults";
 
 const UpdateGroupDetailsPage = () => {
   const navigate = useNavigate();
@@ -17,38 +17,10 @@ const UpdateGroupDetailsPage = () => {
   const { selectedChat } = useSelector((state) => state.chatReducer);
   const { user } = useSelector((state) => state.userReducer);
 
-  const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [chatName, setChatName] = useState("");
+  const [search, setSearch] = useState("");
 
-  const fetchSearchResults = async () => {
-    if (!search) {
-      return;
-    }
-    setLoading(true);
-    try {
-      const { data, status } = await axios.get(
-        `/users/alluser?search=${search}`
-      );
-
-      if (data && status === 200) {
-        setUsers(data);
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error?.response?.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchSearchResults();
-
-    return () => {
-      setUsers([]);
-    };
-  }, [search]);
+  const { users, loading } = useSearchResults(search);
 
   const handleAddUser = async (u) => {
     if (selectedChat.groupAdmin._id !== user?._id) {
